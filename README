@@ -1,0 +1,30 @@
+## Synopsis
+
+Assignment for COMP1005 Fundamenbtals of programming
+
+
+## Contents
+
+README 	            - readme file for Assignment
+location			- details on refrences
+shrimp.py			- class definitions
+simBase.py			- driver code for program
+simBaseSweep.py		- variation for parameter sweep
+simBaseTime.py		- variation for time2change parameter sweep
+simBaseUser.py		- variation without end conditions, for user interactivity
+simBaseCol.py		- variation with slow fps to demo collisions
+sysArgs.py			- code to initialise system arguments
+timeSweep.sh		- bash code for time2change sweep
+paramSweep.sh		- bash code for parameter sweep
+paramSweeps/		- contains results from parameter sweep
+FaultyParamSweeps/	- contains results from old parameter sweep
+pics/				- contains sprites for program
+timeSweepResults/	- contains results from time2change sweep
+User guide.ipynb	- guide on how to use the program
+Report.ipynb		- report for assignment
+
+
+## Date last edited
+
+	30/10/2019
+

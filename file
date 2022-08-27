@@ -1,0 +1,30 @@
+class Date():
+    def __init__(self, day, month, year, hour, minute):
+        self. day = day
+        ...
+
+    def __str__(self):
+        return self.day + '/' + self.month + '/'
+
+
+numericalDates = []
+
+numericalDates.append(0)
+for ii in range(len(dates)):
+    hours = 0
+    hours += (dates[ii+1].day - dates[ii].day) *24
+    hours +=
+
+
+
+
+
+
+    ################33
+
+
+    for line in lines:
+        splitlines
+        readings.append(splitline[0])
+        date = Date(splitline[1][0], splitline[1][1], ...
+        dates.append(date)
