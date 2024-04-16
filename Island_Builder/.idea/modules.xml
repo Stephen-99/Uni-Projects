@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/IslandBuilder.iml" filepath="$PROJECT_DIR$/.idea/modules/IslandBuilder.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/IslandBuilder.app.iml" filepath="$PROJECT_DIR$/.idea/modules/app/IslandBuilder.app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/IslandBuilder.app.androidTest.iml" filepath="$PROJECT_DIR$/.idea/modules/app/IslandBuilder.app.androidTest.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/IslandBuilder.app.main.iml" filepath="$PROJECT_DIR$/.idea/modules/app/IslandBuilder.app.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/IslandBuilder.app.unitTest.iml" filepath="$PROJECT_DIR$/.idea/modules/app/IslandBuilder.app.unitTest.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/IslandBuilder.main.iml" filepath="$PROJECT_DIR$/.idea/modules/IslandBuilder.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/IslandBuilder.test.iml" filepath="$PROJECT_DIR$/.idea/modules/IslandBuilder.test.iml" />
+    </modules>
+  </component>
+</project>

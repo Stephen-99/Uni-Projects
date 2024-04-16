@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="defaultText">14sp</dimen>
+    <dimen name="smallText">10sp</dimen>
+    <dimen name="mediumText">18sp</dimen>
+    <dimen name="largeText">32sp</dimen>
+    <dimen name="smallImage">32dp</dimen>
+    <dimen name="largeImage">48dp</dimen>
+    <dimen name="xLargeImage">96dp</dimen>
+</resources>

@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/frameLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".FragmentDisplay">
+
+    <TextView
+        android:id="@+id/island_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="TextView"
+        android:textSize="@dimen/defaultText"
+        app:layout_constraintBottom_toBottomOf="@id/next_time"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toLeftOf="@id/time"
+        app:layout_constraintTop_toTopOf="@id/next_time" />
+
+    <TextView
+        android:id="@+id/time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="TextView"
+        android:textSize="@dimen/defaultText"
+        app:layout_constraintBottom_toBottomOf="@id/next_time"
+        app:layout_constraintLeft_toRightOf="@id/island_name"
+        app:layout_constraintRight_toLeftOf="@id/money"
+        app:layout_constraintTop_toTopOf="@id/next_time" />
+
+    <TextView
+        android:id="@+id/money"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="TextView"
+        android:textSize="@dimen/defaultText"
+        app:layout_constraintBottom_toBottomOf="@id/next_time"
+        app:layout_constraintLeft_toRightOf="@id/time"
+        app:layout_constraintRight_toLeftOf="@id/income"
+        app:layout_constraintTop_toTopOf="@id/next_time" />
+
+    <TextView
+        android:id="@+id/income"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="TextView"
+        android:textSize="@dimen/defaultText"
+        app:layout_constraintBottom_toBottomOf="@id/next_time"
+        app:layout_constraintLeft_toRightOf="@id/money"
+        app:layout_constraintRight_toLeftOf="@id/next_time"
+        app:layout_constraintTop_toTopOf="@id/next_time" />
+
+    <TextView
+        android:id="@+id/population"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="TextView"
+        android:textSize="@dimen/defaultText"
+        app:layout_constraintBottom_toBottomOf="@id/demolish"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toLeftOf="@id/employment_rate"
+        app:layout_constraintTop_toTopOf="@id/demolish" />
+
+    <TextView
+        android:id="@+id/employment_rate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="TextView"
+        android:textSize="@dimen/defaultText"
+        app:layout_constraintBottom_toBottomOf="@id/demolish"
+        app:layout_constraintLeft_toRightOf="@id/population"
+        app:layout_constraintRight_toLeftOf="@id/temperature"
+        app:layout_constraintTop_toTopOf="@id/demolish" />
+
+    <TextView
+        android:id="@+id/temperature"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="temp here"
+        android:textSize="@dimen/defaultText"
+        app:layout_constraintBottom_toBottomOf="@id/demolish"
+        app:layout_constraintLeft_toRightOf="@id/employment_rate"
+        app:layout_constraintRight_toLeftOf="@id/demolish"
+        app:layout_constraintTop_toTopOf="@id/demolish" />
+
+    <Button
+        android:id="@+id/next_time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:minWidth="0dp"
+        android:minHeight="0dp"
+        android:text="New day"
+        android:textSize="@dimen/smallText"
+        app:layout_constraintLeft_toRightOf="@id/income"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/demolish"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:minWidth="0dp"
+        android:minHeight="0dp"
+        android:text="Demolish"
+        android:textSize="@dimen/smallText"
+        app:layout_constraintLeft_toRightOf="@id/temperature"
+        app:layout_constraintRight_toLeftOf="@id/details"
+        app:layout_constraintTop_toBottomOf="@id/next_time" />
+
+    <Button
+        android:id="@+id/details"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:minWidth="0dp"
+        android:minHeight="0dp"
+        android:text="Details"
+        android:textSize="@dimen/smallText"
+        app:layout_constraintLeft_toRightOf="@id/demolish"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/next_time" />
+</androidx.constraintlayout.widget.ConstraintLayout>
