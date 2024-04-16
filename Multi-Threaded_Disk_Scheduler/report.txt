@@ -1,0 +1,31 @@
+MUTUAL EXCLUSION
+In order to achieve mutual exclusion, I implemented condition variables. This means the threads
+wait until they have been signalled that the condition was changed to true before executing the
+code. For buffer1 I treated the parent as a writer and the children as readers. The parent does not
+check a condition before writing, as long as it can get the mutex lock for buffer1. This is because the
+parent waits for all the results from the child threads before obtaining a new file and writing to
+buffer1 again. Moreover, the child threads will initially wait for their condition variable to change.
+This means There will be no other threads accessing buffer1 when the parent wants to write to it.
+After writing to the buffer, it will update the condition variables to be true, and signal to all waiting
+child threads using pthread_cond_broadcast.
+The children each receive their own condition variable and wait on this variable in order to read the
+buffer. After receiving a signal, the thread updates its condition variable to be false. This ensures
+each thread will only read the buffer once every time the parent signals there is a new write. This
+stops the problem where one thread may read the buffer twice, and another thread may not have
+read the buffer before it gets updated. It also solves the problem where the thread isn’t waiting on
+the condition when the signal is called, and so waits indefinitely. It solves this, with the condition
+variable, since the thread will not wait if the condition is already met. Since I’m using a mutex, only 1
+reader can access the data at a time. A superior implementation might use a semaphore to allow
+multiple readers at the same time.
+For buffer 2, the parent is treated as a reader and the children as writers. Since the buffer size is only
+1 item, a read must occur between each write to ensure no information is lost. I used a mutex to
+ensure only 1 thread accesses the buffer at a time. To ensure this interleaving pattern of reads and
+writes, I used 2 cond variables with 1 condition variable. The 2 cond variables are for one each for
+signalling reads and writes. Upon a successful write, the condition is set to the threads assigned
+thread number and the read cond is signalled to allow the parent to read the buffer. The parent uses
+the thread number in the condition as an index in an array for storing the results. It then resets the
+condition to 0, signals the write cond and waits for the next thread. It will repeat this loop as many
+times as there are threads, allowing it to store the results from all the algorithms and print them in
+the correct order. The checks on the condition variable for the reader require: condition != 0 while
+for the writer requires: condition == 0. This pattern ensures mutual exclusion is achieved, and that
+no results are lost.

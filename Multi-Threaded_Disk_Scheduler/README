@@ -1,0 +1,25 @@
+How to use the program:
+
+The first part is in folder part1. To run this part, move into the part1 folder and 
+run the make command, or make reset to remove existing compiled code.
+then run "./scheduler" to run the program.
+At the prompt, enter an input file. 3 input files (in1.txt, in2.txt and in3.txt) are 
+provided. After you have finished entering files, enter QUIT in all caps, to exit the 
+program. The program will also terminate for any invalid files given
+To run the file with all 3 inputs, run using: "./scheduler < runProg.txt"
+
+Compiling and running the second part is very similar to part1. make can be run from 
+the part2 folder, and the program run with "./simulator". Inputs can be provided from
+a file as in part1.
+To further aid in testing, there is a bash script "run100.sh". This can be run using
+the command: "bash run100.sh"
+This script will run the program with all 3 inputs 100 times, using valgrind to check
+for errors. Any output will be directed to out.txt. The valgrind output to the 
+terminal allows checking for errors or memory leaks that occur. The script is   
+particularly useful in verifying that there is no undefined behavior causing the 
+program to enter a deadlock. If this were the case, the script will wait forever, and 
+it will be clear there is no more output to the terminal. In this case, the script 
+can be exited using ctrl + c.
+
+
+See the Report for a discussion on how mutual exclusion was achieved in the program
