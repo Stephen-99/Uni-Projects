@@ -1,0 +1,17 @@
+
+PARSER_BEGIN(CalendarParser)
+package edu.curtin.app;
+
+public class CalendarParser
+{
+}
+PARSER_END(CalendarParser)
+
+SKIP: { " " | "\n" }
+
+void parse() :
+{
+}
+{
+    <EOF>
+}

@@ -1,0 +1,41 @@
+plugins {
+    id 'java'
+    id 'application'
+    id 'org.openjfx.javafxplugin' version '0.0.14'
+    id 'pmd'
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+	implementation 'commons-io:commons-io:2.5'
+}
+
+compileJava {
+    options.compilerArgs << "-Xlint:all,-serial"
+}
+
+javafx {
+    version = '17.0.8'
+    modules = [ 'javafx.controls' ]
+}
+
+// String / Text 
+//implementation group: 'org.apache.commons', name: 'commons-text', version: '1.8'
+
+// IO - https://commons.apache.org/proper/commons-io/
+//implementation group: 'commons-io', name: 'commons-io', version: '2.7'
+
+application {
+    mainClass = 'edu.curtin.filesearcher.FileSearcher'
+}
+
+pmd {
+    consoleOutput = true
+    toolVersion = '6.55.0'
+    rulesMinimumPriority = 5
+    ruleSets = []
+    ruleSetFiles = files('saed-pmd-rules.xml')
+}

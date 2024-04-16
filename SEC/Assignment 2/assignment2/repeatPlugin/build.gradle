@@ -1,0 +1,20 @@
+plugins {
+    id 'java'
+    id 'pmd'
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation project(':api')
+}
+
+pmd {
+    consoleOutput = true
+    toolVersion = '6.55.0'
+    rulesMinimumPriority = 5
+    ruleSets = []
+    ruleSetFiles = files('../saed-pmd-rules.xml')
+}
