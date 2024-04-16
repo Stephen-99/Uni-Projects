@@ -1,0 +1,132 @@
+Initial stats:
+
+Statistics:
+------------------------------
+Infected:   	 10.00 %
+Carrier:    	 0.00 %
+Susceptible: 	 90.00 %
+Recovered:  	 0.00 %
+Dead:  		 0.00 %
+
+In response to spread of the virus the government has prohibited public gatherings greater than 50 people
+In response to spread of the virus the government has closed universities
+In response to spread of the virus the government has implemented social distancing
+
+Week 2:
+
+Statistics:
+------------------------------
+Infected:   	 20.00 %
+Carrier:    	 23.00 %
+Susceptible: 	 48.00 %
+Recovered:  	 1.00 %
+Dead:  		 8.00 %
+
+In response to spread of the virus the government has prohibited all gatherings greater than 20 people
+In response to spread of the virus the government has closed schools
+
+Week 4:
+
+Statistics:
+------------------------------
+Infected:   	 21.00 %
+Carrier:    	 21.00 %
+Susceptible: 	 34.00 %
+Recovered:  	 8.00 %
+Dead:  		 16.00 %
+
+
+Week 6:
+
+Statistics:
+------------------------------
+Infected:   	 20.00 %
+Carrier:    	 14.00 %
+Susceptible: 	 23.00 %
+Recovered:  	 13.00 %
+Dead:  		 30.00 %
+
+
+Week 8:
+
+Statistics:
+------------------------------
+Infected:   	 12.00 %
+Carrier:    	 5.00 %
+Susceptible: 	 23.00 %
+Recovered:  	 22.00 %
+Dead:  		 38.00 %
+
+
+Week 10:
+
+Statistics:
+------------------------------
+Infected:   	 9.00 %
+Carrier:    	 4.00 %
+Susceptible: 	 18.00 %
+Recovered:  	 22.00 %
+Dead:  		 47.00 %
+
+In response to the easing of the virus, the government has re-opened schools
+
+Week 12:
+
+Statistics:
+------------------------------
+Infected:   	 8.00 %
+Carrier:    	 1.00 %
+Susceptible: 	 17.00 %
+Recovered:  	 23.00 %
+Dead:  		 51.00 %
+
+
+Week 14:
+
+Statistics:
+------------------------------
+Infected:   	 3.00 %
+Carrier:    	 0.00 %
+Susceptible: 	 17.00 %
+Recovered:  	 25.00 %
+Dead:  		 55.00 %
+
+In response to the easing of the virus, the government has removed social distancing
+In response to the easing of the virus, the government has allowed all gatherings up to 50 people
+
+Week 16:
+
+Statistics:
+------------------------------
+Infected:   	 2.00 %
+Carrier:    	 0.00 %
+Susceptible: 	 17.00 %
+Recovered:  	 25.00 %
+Dead:  		 56.00 %
+
+In response to the easing of the virus, the government has re-opened universities
+
+Week 18:
+
+Statistics:
+------------------------------
+Infected:   	 1.00 %
+Carrier:    	 0.00 %
+Susceptible: 	 17.00 %
+Recovered:  	 25.00 %
+Dead:  		 57.00 %
+
+In response to the easing of the virus, the government has allowed public gatherings greater than 50 people
+
+Week 20:
+
+Statistics:
+------------------------------
+Infected:   	 0.00 %
+Carrier:    	 0.00 %
+Susceptible: 	 17.00 %
+Recovered:  	 26.00 %
+Dead:  		 57.00 %
+
+Simulation ended
+Simulation state: Virus cured!
