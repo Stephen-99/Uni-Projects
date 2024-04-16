@@ -1,0 +1,205 @@
+prompt for house or army			
+prompt for name
+prompt for age
+re prompt
+re prompt
+re prompt
+prompt for bannermen
+re prompt
+prompt for castle name
+prompt for Sigil
+re prompt
+re prompt
+prompt for banner colour
+re prompt
+re prompr
+prompt for sigil colour
+Main menu
+prompt for house or army
+prompt for name
+prompt for age
+prompt for bannermen
+prompt for castle
+prompt for sigil
+prompt for banner colour
+prompt for sigil colour
+Main Menu
+prompt for house or army
+prompt for name
+prompt for age
+re prompt
+re prompt
+re prompt
+prompt for footmen
+re prompt
+re prompt
+prompt for archers
+prompt for history
+prompt for sigil
+prompt for banner colour
+prompt for sigil colour
+Main Menu
+prompt for hosue or army
+prompt for name
+prompt for age
+prompt for footmen
+prompt for archers
+prompt for history
+prompt for sigil
+prompt for banner Colour
+prompt for sigil colour
+Main Menu
+prompt strength options
+stongest alliance test, strength of 24000
+Kingdom strength: 46941
+Main Menu
+Armies 1 and 2 are the same
+prompt filename
+un friendly error -> Main Menu									FAIL!!
+prompt for filename
+kingdoms are equal -> Main Menu
+displays current alliances -> Main Menu
+stark 544, test: 12000, Hesheroth: 44793, Hesheroth: 44793-> Main Menu
+prompt for alliance name
+prompt for sigil
+prompt for banner colour
+prompt for sigil colour
+Banner updated successfully
+showed alliances with updated banner
+prompt for filename
+unable to load -> Main Menu
+prompt for filename
+succesfully loaded -> Main Menu
+prompt for filename
+Error msg: invalid objects in file, see below for mor detail -> Main Menu
+prompt for filename
+succesfully loaded: see below for more detail-> Main Menu
+prompt for filename
+saved successfully -> MainMenu
+prompt for filename
+saved successfully -> MainMenu
+prompt for filename
+saved successfully -> MainMenu
+show current alliances -> Main Menu
+Goodbye -> terminal
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Total tests:	80
+passed:			79
+failed:			1
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+2nd test, conduct UPON Completion of first test:
+
+1. 	prompt for filename
+2.	successfully loaded <- main Menu
+3.	prompt for filename
+4.	kingdoms match <- Main menu
+5.	prompt for filename
+6.	successfully loaded <- main menu
+7. 	prompt for filename
+8.	successfully loaded <- main menu
+9. 	prompt for file name
+10.	successfully loaded <- main menu
+11.	display alliances, has each from loaded files, might have overloaded arrays
+12. goodbye <- terminal
+
+Keep loading till should be overfull. -> max houses reached, max armies reached
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Total tests:	13
+passed:			13
+failed:			0
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+FROM FILES:
+
+
+	test1.csv
+
+		HOUSE:
+			1.	valid
+			2.	valid
+		ARMY:
+			3. 	valid
+			4. 	valid
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Total tests:	4
+passed:			4
+failed:			0
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+	test2.csv
+
+		HOUSE:
+			1.	empty name!
+			2. 	invalid years min
+			3. 	invalid years max
+			4.  invalid sigil
+			5.  invalid bannercol too short
+			6. 	invalid sigilcol not a col
+			7. 	invalid bannermen min
+			8.	invalid bannermen max
+		ARMY:
+			9.	empty name!
+			10. invalid years min
+			11. invalid years max
+			12. invalid sigil
+			13. invalid bannercol null
+			14. invalid sigilcol too long
+			15.	invalid footmen min
+			16. invalid footmen max
+			17. invalid archers min
+			18. invalid archers max
+			19. invaid alliance, wrong char
+			20. invalid alliance, inccorrect length
+			21. invalid alliance, null
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Total tests:	21
+passed:			21
+failed:			0
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+		
+	test3.csv
+
+	NOTE: all results should be valid, below depicts what is being tested
+	
+		HOUSE:
+			1.	valid
+			2.	valid
+			3.	valid
+			4.	valid
+			5.	valid
+			6. 	valid
+		ARMY:
+			7.	valid
+			8.	valid
+			9.	valid
+			10. valid
+			11. valid
+			12. valid
+			13. valid
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Total tests:	13
+passed:			13
+failed:			0
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+	All three saved fiels saved correctly.
+ 
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Total tests:	3
+passed:			3
+failed:			0
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+OVERALL
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Total tests:	133
+passed:			132
+failed:			1
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

@@ -1,0 +1,347 @@
+/******************************************************************************
+* Filename:         Kingdom.txt                                               *
+* Author:           Stephen den Boer                                          *
+* Unit code:		COMP 1001												  *
+* Student ID:		19761257												  *
+* Purpose:          Kindgom class, responsible for managing alliance          *
+* Date created:     27/09/2019                                                *
+* Last modified:    25/10/2019                                                *
+* changes:                                                                    *
+* 	EDIT 1 | 18/10/2019 | updated houses and allies getters to return a copy  *
+*						  of the arrays. implemented allianceBattleStrength   *
+*                         and kingdomBattleStrength. updated find duplicates  *
+*                         to remove double ups. Updated equals methods into   *
+*                         one general method to check if arrays are equal.    *
+*						  Multiple instances where return statemnet was blank *
+*						  instead return "no alliances implemented" or        *
+*                         similar. Implemented view alliance population       *
+*	EDIT 2 | 23/10/2019 | updated to use alliance arrays instead of seperate  *
+*						  house and army arrays.This involved updating almost *
+*						  all methods.										  *
+*						  implemented updateAlliance fully					  *
+*						  added a class constant for array size				  *
+*   EDIT 3 | 25/10/2019 | implemented combatable. kingdomBattleStrength now   *
+*                         calls battleStrength also findDuplicate so not 	  *
+*						  cheking if Alliance is House or Army                *
+******************************************************************************/
+
+CLASS: Kingdom implements Combatable 
+
+	CLASS CONSTANTS:
+		MAXARRAY(Integer) := 30
+
+    CLASS FIELDS:
+        allies(ARRAY OF Alliance)
+        alCount(Integer)
+        houses(ARRAY OF House)
+        houseCount(Integer)
+   
+
+	CONSTRUCTORS:
+	
+ 
+    default 
+    IMPORT: 	none
+    ASSERTION: 	will construct the array and initialise count var to 0
+    ALGORITHM:
+        (SIZE OF)allies := MAX ARRAY
+        alCount := 0
+    END default CONSTRUCTOR
+
+	Copy
+	IMPORT:		inKing(Kingdom)
+	EXPORT:		address of new Kingdom object
+	ASSERTION:	Creates an identical object as imported
+
+		allies := inKing.getAllies <- none
+		alCount := inKing.getAlCount <- none
+	END copy CONSTRUCTOR
+
+
+	ACCESSORS:
+
+
+	clone
+	IMPORT:		none
+	EXPORT:		newKingdom(Kingdom)
+	ASSERTION:	will make a copy of the current object
+		newKingdom := copy Constructor <- this
+	END clone
+
+	SUBMODULE:	getAllies
+	IMPORT:		none
+	EXPORT:		copy of allies(ARRAY OF Alliance)
+        newAllies(Alliance ARRAY)(SIZE OF MAXARRAY)
+        FOR ii := 0 TO alCount(exclusive) INC ii BY 1
+            newAllies[ii] := allies[ii].clone <- none
+        END FOR
+    END SUBMODULE getAllies
+
+	SUBMODULE:	getAlCount
+	IMPORT:		none
+	EXPORT:		alCount(Integer)
+
+
+	PUBLIC SUBMODULES
+
+
+    SUBMODULE:  addAlliance
+    EXPORT:     statement(String)
+    ASSERTION:  Will create either an object of either house or army
+    ALGORITHM:
+		type(integer) := UserInterface.inputNum <- "Please enter the integer "
+			+ "that corresponds with your choice" + NEWLINE 
+			+ " 1. Add a new house to the kingdom" + NEWLINE 
+			+ " 2. Add a new army to the kingdom" + NEWLINE, 1, 2
+		TRY
+			IF type = 1 THEN
+				newAlliance(Alliance) := UserInterface.initHouse <- none
+				addAlliance <- newHouse
+			END IF
+			ELSE			COMMENT: type will be 2. handled in UserInterface
+				newAlliance(Alliance) := UserInterface.initArmy <- none
+				addAlliance <- newAlliance
+			END ELSE
+			statement := "A new Alliance has been added to the kingdom"
+		END TRY
+		CATCH invalid argument exception
+			UserInterface.showError <- error msg
+            statement := "Could not add Alliance"
+		END CATCH
+	END SUBMODULE addAlliance
+
+	SUBMODULE:	addAlliance
+	IMPORT:		inAlliance(Alliance)
+	ASSERTION:	if inAlliance is not empty, and there is space in the array, 
+				it will be added to the array
+	ALGORITHM:
+		IF inAlliance != null THEN
+			IF alCount < MAXARRAY THEN
+				allies[alCount] := inAlliance
+				alCount := alCount + 1
+			END IF
+			ELSE
+				THROW illegal argument exception <- "The maximum number of "
+					+ "allies has been reached."
+			END ELSE
+		END IF
+		ELSE
+			FAIL illegal argument exception <- "The alliance provided empty."
+		END ELSE
+	END SUBMODULE addAlliance
+    
+	SUBMODULE: 	allianceBattleStrength
+	EXPORT:		statement(String)
+	ASSERTION:	find the alliance with the greatest battle strength 
+				and return return that strength
+	ALGORITHM:
+		batStr(Integer) := 0
+		count := 0
+
+		FOR ii := 0 TO 	alCount(Exclusive) INC BY 1
+			tempStr := allies[ii].battleStrength <- none
+
+			IF tempStr > batStr THEN
+				batStr := tempStr
+				count := ii +1
+			END IF
+		END FOR
+	
+		IF count = 0 THEN
+			statement := "No alliances present"
+		END IF
+		ELSE
+			statement := "The strongest alliance:" + NEWLINE 
+				+ allies[count-1].toString <- none + NEWLINE 
+				+ "It has a strength of: " + batStr
+
+	END SUBMODULE allianceBattleStrength
+
+	SUBMODULE:	kingdomBattleStrength
+	EXPORT:		statement(String)
+	ASSERTION:	calculate and return the total strength of the kingdom
+	ALGORITHM:
+        kingStr(Integer) := battleStrength <- none
+		statement := "The strength of the kingdom is: " + kingStr
+	END SUBMODULE kingdomBattleStrength
+
+    SUBMODULE:  battleStrength
+    EXPORT:     kingStr(Integer)
+    ASSERTION:  returns kingdom strength
+    ALGORITHM:
+		kingStr(integer) := 0
+		
+		FOR ii := 0 TO 	alCount(exclusive) INC BY 1
+			tempStr := allies[ii].battleStrength <- none
+			kingStr := kingStr + tempStr
+		END FOR
+
+	SUBMODULE:	findDuplicates
+	EXPORT:		statement(String)
+	ASSERTION:	find any duplicate allies and houses
+	ALGORITHIM:
+		statement := ""
+
+		FOR ii := 0 TO alCount(exclusive) INC BY 1	
+			FOR jj := ii + 1 TO alCount(exclusive) INC BY 1
+
+				equal(boolean) := allies[ii].equals(allies[jj])
+
+				IF equal THEN
+					statement := statement + aliies.obtainType <- none 
+						+ (ii + 1) + " and " + (jj + 1)+ " are the same" 
+						+ NEWLINE
+				END IF
+			END FOR
+		END FOR
+		IF statement EQUALS "" THEN
+			statement := "No alliances are duplicated"
+		END IF
+	END SUBMODULE findDuplicates
+
+	SUBMODULE:	compareKingdoms
+	EXPORT:		statement(String)
+	ASSERTION:	constructs a new kingdom from the file manager and compares
+				it to the current kingdom
+	ALGORITHM:
+
+		newKingdom(Kingdom) := default constructor <- none
+
+		read(boolean) := FileManager.input <- newKingdom 
+		
+		IF read THEN	
+			IF alCount > 0
+				statement := "The kingdoms are not equal"
+				equal := equals(allies, alCount, newKingdom.allies, 
+					newKingdom.alCount)
+		
+				IF equal THEN
+					statement := "The kingdoms are the same"
+				END IF
+			END IF
+			ELSE
+				statement := "The file for the kingdom could not be read"
+		END IF
+		ELSE
+			statement := "The file for the kingdom could not be read"
+		END ELSE
+	END SUBMODULE compareKingdoms	
+
+	SUBMODULE:	viewAlliance
+	EXPORT:		statement(String)
+	ASSERTION:	will return a string with information from all alliances.
+	ALGORITHM:
+
+		statement := ""
+		
+		FOR ii := 0 TO alCount(exclusive) INC BY 1
+			statement := statement + allies[ii].toString <- none + 2 NEWLINEs
+		END FOR
+		IF statement EQUALS ""
+			statement := "No alliances currently in kingdom"
+		ENF IF
+	END SUBMODULE viewAlliance
+
+	SUBMODULE:	viewAlliancePopulation
+	EXPORT:		statment(String)
+	ASSERTION:	will return a string with the population of all alliances
+	ALGORITHIM:
+	
+		statement := ""
+
+		FOR ii := 0 TO alCount(exclusive) INC BY 1
+			statement := statement + allies[alCount].population <- none 
+				+ NEWLINE
+		END FOR
+		IF statement EQUALS ""
+			statement := "No alliances currently in kingdom"
+		END IF
+	END SUBMODULE viewAlliancePopulation
+
+	SUBMODULE:	updateAlliance
+	EXPORT:		statement(String)
+	ASSERTION:	Will update the banner of alliance if input is valid
+	ALGORITHIM:
+		inName(String) := (CONVERT TO UPPERCASE)UserInterface.getString <- 
+			"Please enter the name of the alliance you wish to update."
+
+		tempName(String) := ""
+		count(Integer) := 0
+
+		WHILE ((inName NOT EQUALS tempName) AND (count < alCount))
+			tempName := (CONVERT TO UPPERCASE)allies[count].getName <- none
+			count := count + 1
+		END WHILE
+
+		IF count = 0 THEN 	
+			statement := "Alliance not found"
+		END IF
+		ELSE IF inName EQUALS tempName THEN
+			allies[count - 1].setBanner <- UserInterface.initBanner <- none
+			statement := "Banner successfully updated"	
+		END ELSE
+		ELSE		
+			statement := "Alliance found"
+		END ELSE
+	END SUBMODULE updateAlliance
+
+	SUBMODULE: 	loadAlliance
+	EXPORT:		statement(String)
+	ASSERTION:	Will load a Kingdom from file
+	ALGORITHIM:
+		read(boolean) := FileManager.input <- CURRENT KINGDOM
+		IF read THEN
+			IF alCount > 0 THEN
+				statement := "Kingdom has successfully been loaded"
+			END IF
+			ELSE
+				statement := "No alliances could successfully be loaded"
+		END IF
+		ELSE
+			statement := "The Kingdom could not be loaded"
+		END ELSE
+
+			COMMENT: This method will ask userinterface for filename, 
+				than read file, throwing errors if incorrect. If correctly 
+				formatted, will call kingdom to add alliances to the array...
+
+	END SUBMODULE loadAlliance		
+
+	SUBMODULE:	saveAlliance
+	EXPORT:		statement(String)
+	ASSERTION:	will save the current kingdom to file.
+	ALGORITHM:
+		FileManager.output <- CURRENT KINGDOM
+		statement := "Kingdom has successfully been saved"
+	
+	END SUBMODULE saveAlliance
+	
+	SUBMODULE:	equals
+	IMPORT:		arr1(ARRAY OF Object), arr1Count(Integer),
+				arr2(ARRAY OF Object), arr2Count(Integer)
+	EXPORT:		equal(Boolean)
+	ASSERTION:	will compare allies to that of current kingdom
+	ALGORITHIM:
+		
+		IF arr1Count = arr2Count THEN
+			IF arr1Count = 0 THEN
+				equal := TRUE		COMMENT: Both are empty
+			END IF
+			ELSE
+				maxCount(integer) := arr1Count
+				count(integer) := 0
+			
+				DO
+					equal := arr1[count] EQUALS arr2[count]
+					count := count + 1
+				WHILE equal AND count < maxCount
+			END ELSE
+		END IF
+		ELSE
+			equal := FALSE;
+		END ELSE
+
+	END SUBMODULE equals
+	
+	
+END CLASS Kingdom

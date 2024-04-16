@@ -1,0 +1,169 @@
+/******************************************************************************
+* Filename:         FileManager.txt                                           *
+* Author:           Stephen den Boer                                          *
+* Unit code:		COMP 1001												  *
+* Student ID:		19761257												  *
+* Purpose:        	Handles any file interaction for kingdom class            *
+* Date created:     09/10/2019                                                *
+* Last modified:    25/10/2019                                                *
+* changes:                                                                    *
+* 	EDIT 1 | 18/10/2019 | updated process line to construct alliances with 	  *
+*						  banners.                                            *
+*	EDIT 2 | 23/10/2019 | updated output to use alliance array instead of 	  *
+*						  house and army arrays								  *
+*	EDIT 3 | 25/10/2019 | updated so kingdom is imported instead of object.	  *
+******************************************************************************/
+
+CLASS:	FileManager
+	
+	NOTE:	ALL METHODS MUST BE STATIC
+
+	SUBMODULE:	input
+	IMPORT:		kingdom(Kingdom)
+	EXPORT:		read(boolean)
+	ASSERTION:	Will fill the kingdom from file
+	ALGORITHM:
+		
+		filename(String) <- UserInterface.getString <- "Please enter the name "
+			+ "of the file storing the kingdom you wish to load"
+
+		read(boolean) := readFile <- filename, kingdom
+			
+
+	END SUBMODULE input
+
+	SUBMODULE:	readFile
+	IMPORT:		filename(String), kingdom(Kingdom)
+	EXPORT:		read(boolean)
+	ASSERTION:	will read and process each line of the given file
+
+		read(boolean) := true
+        lineNum := 0
+        TRY
+			OPEN FILE <- filename
+  			INPUT line FROM file
+          	WHILE((line != null) 
+                processLine(line, kingdom)
+                INPUT line FROM file
+            
+			END WHILE 
+			
+			CLOSE FILE <- filename
+			
+		END TRY
+		CATCH IO EXCEPTION
+			IF FILE filename != null THEN
+				TRY
+					CLOSE FILE <- filename			
+				END TRY
+				CATCH INPUT OUTPUT EXCEPTION
+					COMMENT: Nothing further can be done
+				END CATCH
+			END IF
+			
+			UserInterface.showError <- "Could not read the file: " + filename
+			read := false
+		END CATCH
+
+    END SUBMODULE readFile
+	
+	SUBMODULE: 	processLine
+	IMPORT:		line(String), kingdom(Kingdom)
+	ASSERTION:	will add army or house to kingdom if valid
+	ALGORITHIM:
+		TRY
+			lineArray(ARRAY OF STRINGS) := line.split(",")
+
+			IF lineArray LENGTH != 8 AND != 9 THEN
+				THROW illegal argument exception <- "ERROR: line was not "
+					+ "correct length"
+			END IF
+			IF lineArray[0] LENGTH != 1 THEN
+				THROW illegal argument exception <- "ERROR: First entry on "
+					+ "line must be a single character" 
+			END IF
+		
+			type(Character) := lineArray[0].charAt(0)
+
+			name(String) := lineArray[1]
+			years(Integer) := (CONVERT TO Integer)lineArray[2]
+			sigil(String) := lineArray[3]
+			bannerColour(String) := lineArray[4]
+			sigilColour(String) := lineArray[5]
+				COMMENT: both colours are stored as strings and converted to 
+					integer in the Banner class
+			
+			newBanner(Banner) := Banner <- sigil, bannerColour, sigilColour
+	
+			CASE (CONVERT TO UPPERCASE) type
+				case 'H':
+					bannermen(Integer) := (CONVERT TO Integer) lineArray[6]
+					castle(String) := lineArray[7]
+				
+					newHouse(House) := House <- name, years, bannermen, castle
+						COMMENT: all validation is taken care of in house class
+							any error will be illegal argument and will be 
+							caught
+			
+					kingdom.addAlliance(newHouse)
+
+				case 'A':
+					footmen(Real) := (CONVERT TO Real)lineArray[6]
+					archers(Real) := (CONVERT TO Real)lineArray[7]
+					history(String) := lineArray[8]
+						COMMENT: validation taken care of in Army class, any
+							errors will be illegal arg and will be caught
+
+					newArmy(Army) := Army <- name, years, footmen, archers, 
+						history				
+				DEFAULT:
+					THROW IllegalArgumentException <- "ERROR: first entry on "
+						+ "line must be either 'H' for house or 'A' for Army"
+			END CASE
+		END TRY
+		CATCH invalid data type
+			UserInterface.showError <- "Stored values were not correct type"
+		END CATCH
+		CATCH illegal argument exception 
+			UserInterface.showError <- error msg
+		END CATCH
+	END SUBMODULE processLine
+	
+	SUBMODULE:	output
+	IMPORT:		kingdom(Kingdom)	
+	ASSERTION:	will write kingdom to csv file
+	ALGORITHIM:
+
+		filename(String) <- UserInterface.getString <- "Please enter the name "
+			+ "of the file where you wish to store the kingdom"
+
+		TRY		
+			OPEN FILE <- filename
+			allies(ARRAY OF Alliance) := kingdom.getAllies <- none
+			count(Integer) := kingdom.getAlCount			
+
+			FOR ii := 0 TO count(exclusive) INC BY 1
+				PRINT LINE TO FILE allies[ii].toFileString <- none
+			END FOR
+		
+		END TRY
+		CATCH INPUT OUTPUT EXCEPTION
+			IF FILE filename != null THEN
+				TRY
+					CLOSE FILE <- filename			
+				END TRY
+				CATCH INPUT OUTPUT EXCEPTION
+					COMMENT: Nothing further can be done
+				END CATCH
+			END IF
+			
+			UserInterface.showError <- "Could not write the file "
+		END CATCH
+	END SUBMODULE output
+		
+
+
+END CLASS FileManager
+
+
+

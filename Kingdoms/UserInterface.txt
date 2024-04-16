@@ -1,0 +1,214 @@
+/******************************************************************************
+* Filename:         UserInterface.txt                                         *
+* Unit code:		COMP 1001												  *
+* Student ID:		19761257												  *
+* Author:           Stephen den Boer                                          *
+* Purpose:         	handles all user input and output for kingdom             *
+* Date created:     05/10/2019                                                *
+* Last modified:    25/10/2019                                                *
+* changes:                                                                    *
+* 	EDIT 1 | 18/10/2019 | added banner initialisation for init house/army	  *
+*   EDIT 2 | 22/10/2019 | submoduled banner initialisation in init House/Army *
+*	EDIT 3 | 24/10/2019 | fixed round submodule								  *
+*	EDIT 4 | 25/10/2019 | changed variable 'valid' to 'invalid' in method	  *
+*						  initBanner, to increase clairty					  *
+******************************************************************************/
+
+CLASS:	UserInterface
+
+	NOTE: all methods must be static
+
+	CLASSFIELDS: none
+
+	SUBMODULE:	inputNum
+	IMPORT:		prompt(String), min(Integer), max(Integer)
+	EXPORT:		value(Integer)
+	ASSERTION:	will ensure user value is an integer between min and max
+	ALGORITHM:
+		
+		value := min - 1
+		error(String) := "ERROR: value must be between " + min + " and " + max
+		outStr := prompt
+
+		DO
+			TRY
+				OUTPUT outStr
+				INPUT value
+				outStr := error + NEWLINE + prompt
+			END TRY
+
+			CATCH invalid data type
+				clear INPUT
+				outStr = "ERROR: input must be an integer" + NEWLINE + prompt
+			END CATCH
+
+		WHILE ((value < min) OR (value > max))
+		END DO
+
+	END SUBMODULE inputNum
+
+	SUBMODULE:	inputNum
+	IMPORT:		prompt(String), min(Real), max(Real)
+	EXPORT:		value(Real)
+	ASSERTION:	will ensure user value is a real number between min and max
+	ALGORITHM:
+		
+		value := min - 1
+		error(String) := "ERROR: value must be between " + min + " and " + max
+		outStr := prompt
+
+		DO
+			TRY
+				OUTPUT outStr
+				INPUT value
+				outStr := error + NEWLINE + prompt
+			END TRY
+
+			CATCH invalid data type
+				clear INPUT
+				outStr = "ERROR: input must be a Real number" + NEWLINE 
+					+ prompt
+			END CATCH
+
+		WHILE ((value < min) OR (value > max))
+		END DO
+
+	END SUBMODULE inputNum
+
+	SUBMODULE:	initHouse
+	EXPORT:		newHouse(House)
+	ASSERTION:	Will create a valid house object based on user input.
+	ALGORITHM:
+		inName(String) := getString <- "Please enter a name for the house"
+		
+		inYears(Integer) := input <- "Please provide the age of the house",
+			House.YEARMIN, House.YEARMAX
+
+		inBannermen(Integer) := input <- "Please provide the number of "
+			+ "bannermen serving the house", House.BANMIN, House.BANMAX
+	
+		OUTPUT "Please enter the name of the castle occupied by this "
+			+ "house. If no castle is occupied leave blank"
+		INPUT inCastle(String)
+	
+		newHouse(House) := House <- inName, inYears, inBannermen, inCastle, 
+			initBanner <- none
+
+	END SUBMODULE initHouse
+
+
+	SUBMODULE:	initArmy
+	EXPORT:		newArmy(Army)
+	ASSERTION:	To create a valid Army opbject based on user input
+	ALGORITHM:
+
+		inName(String) := getString <- "Please enter a name for the army"
+		
+		inYears(Integer) := input <- "Please provide the age of the army",
+			Army.YEARMIN, Army.YEARMAX
+
+		inArchers(Real) := input <- "Please enter the number of squads of "
+			+ "archers serving the army", Army.ARCHERMIN, Army.ARCHERMAX
+	
+		inFootmen(Real) := input <- "Please enter the number of groups of "
+			+ "footmen serving the army", Army.FOOTMIN, Army.FOOTMAX
+
+		OUTPUT "Please enter the history of the army, if there is no history "
+			+ "leave blank"
+		INPUT inHistory(String)
+		
+		newArmy(Army) := Army <- inName, inYears, inFootmen, inArchers, 
+			initBanner <- none
+
+	END SUBMODULE initArmy
+	
+	SUBMODULE:	getString
+	IMPORT:		prompt(String)
+	EXPORT:		userInput(String)
+	ASSERTION:	will obtain a non-null string from the user
+		
+		outStr(String) := prompt
+	
+		DO
+			OUTPUT outStr
+			INPUT userInput
+			outStr := "ERROR: please provide text" + NEWLINE + prompt
+		WHILE (userInput = null OR userInput EQUALS "")
+		END DO
+	END SUBMODULE getString
+
+	SUBMODULE:	round
+	IMPORT:		value(Real)
+	EXPORT:		value(Real)
+	ASSERTION:	will round the value to 2 decimal places
+	ALGORITHM:
+		intValue(integer) := (CONVERT TO Integer)((value + 0.005) * 100)	
+			COMMENT: will be truncated, + 0.005 to round, * 100 to save 2 
+				decimal places 
+		value := intValue / 100
+		
+	END SUBMODULE round
+
+	SUBMODULE:	showError
+	IMPORT:		error(String)
+	ASSERTION:	will output error
+	ALGORITHM:
+		OUTPUT error
+	END SUBMODULE showError
+
+	SUBMODULE:	initBanner
+	IMPORT:		none
+	EXPORT:		newBan(Banner)
+	ASSERTION:	will construct a banner based on user input
+	ALGORITHM:
+		newBan(Banner) := Banner <- none
+		COMMENT: constructing a default banner 
+			allows access to validation modules
+
+		invalid(Boolean) := TRUE
+		WHILE invalid
+			TRY
+				inSigil(String) := getString <- "Please enter a sigil for " 
+					+ "the banner"
+				newBan.setSigil <- inSigil
+				invalid := FALSE		COMMENT: will only trigger if 
+									previous line doesn't throw an error
+			END TRY
+			CATCH Illegal Argument Exception
+				showError <- err msg
+			END CATCH
+		END WHILE
+
+		invalid(Boolean) := TRUE
+		WHILE invalid
+			TRY
+				inBanCol(String) := getString <- "Please enter a banner "
+					+ "colour for the banner"
+				newBan.setBannerColour <- inBanCol
+				invalid := FALSE		COMMENT: will only trigger if 
+									previous line doesn't throw an error
+			END TRY
+			CATCH Illegal Argument Exception
+				showError <- err msg
+			END CATCH
+		END WHILE
+
+		invalid(Boolean) := TRUE
+		WHILE invalid
+			TRY
+				inSigCol(String) := getString <- "Please enter a sigil "
+					+ "colourfor the banner"
+				newBan.setSigilColour <- inSigCol
+				invalid := FALSE		COMMENT: will only trigger if 
+									previous line doesn't throw an error
+			END TRY
+			CATCH Illegal Argument Exception
+				showError <- err msg
+			END CATCH
+		END WHILE
+
+
+END CLASS:	UserInterface
+
+	
+

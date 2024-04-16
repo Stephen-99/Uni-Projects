@@ -1,0 +1,216 @@
+/******************************************************************************
+* Filename:         Alliance.txt                                              *
+* Author:           Stephen den Boer                                          *
+* Unit code:		COMP 1001												  *
+* Student ID:		19761257												  *
+* Purpose:          Template for Alliance class                               *
+* Date created:     22/10/2019                                                *
+* Last modified:    25/10/2019                                                *
+* changes:                                                                    *
+* 	EDIT 1 | 25/10/2019 | Updated toFileString to use banner's toFileString   *
+*						  Added an abstract method obtainType				  *
+*						  Edited formatting	
+******************************************************************************/
+
+ABSTRACT CLASS: Alliance implements Combatable
+
+	PUBLIC CLASS CONSTANTS
+		YEARMIN(Integer) := 1
+		YEARMAX(Integer) := 10000
+
+	CLASS FIELDS:	name(String)
+					years(Integer)
+					banner(Banner)
+
+	
+	CONSTRUCTORS:
+		
+		
+	Default:
+	IMPORT:		none
+	EXPORT:		address of new Alliance object
+	ASSERTION:	The Alliance "Hesketh" is 12 years old. It has a banner with 
+				sigil: DRAGON, banner colour FF0FF0 and sigil colour 00F00F
+				This is the valid default state
+	ALGORITHIM:
+		name := "Hesketh"
+		years := 12
+		banner := new Banner <- "DRAGON", "FF0FF0", "00F00F"
+	END Default CONSTRUCTOR
+
+	Alternate1:
+	IMPORT:		inName(String), inYears(Integer), inSigil(String), 
+				inBanCol(String), inSigCol(String)
+	EXPORT:		address of new alliance object
+	ASSERTION:	creates new object if imports are valid. will fail otherwise
+		setName <- inName
+		setYears <- inYears
+		banner := new Banner <- inSigil, inBanCol, inSigCol
+	END Alternate1 CONSTRUCTOR
+
+	Alternate2:
+	IMPORT:		inName(String), inYears(Integer), inBanner(Banner)
+	EXPORT:		address of new Alliance object
+	ASSERTION:	will construct the object if imports are valid, FAILS otherwise
+	ALGORITHIM:
+		setName <- inName
+		setYears <- inYears
+		setBanner <- inBanner
+	END Alternate 2 CONSTRUCTOR
+
+	Copy:
+	IMPORT:		inAll(Alliance)
+	EXPORT:		address of new Alliance
+	ASSERTION:	will create a new object with identical state to import
+	ALGORITHIM:
+		name := inAll.getName <- none
+		years := inAll.getYears <- none
+		banner := inAll.getBanner <- none
+	END copy CONSTRUCTOR
+
+	
+	ACCESSORS:
+
+	
+	SUBMODULE:	getName
+	IMPORT:		none
+	EXPORT:		name(String)
+
+	SUBMODULE:	getYears
+	IMPORT:		none
+	EXPORT:		years(Integer)
+		
+	SUBMODULE:	getBanner
+	IMPORT:		none
+	EXPORT:		banner(Banner)
+
+	SUBMODULE:	equals
+	IMPORT:		inName(String), inYears(Intrger), inBanner(Banner)
+	EXPORT:		equal(Boolean)
+	ASSERTION:	will return true if objects are equivelent
+	ALGORITHIM:
+		equal := ((name EQUALS inName) AND (years = inYears) AND 
+			(banner EQUALS inBanner))
+	END SUBMODULE equals
+
+	SUBMODULE:	equals
+	IMPORT:		inObj(Object)
+	EXPORT:		equal(Boolean)
+	ASERTION:	Will return true if objects are equivelent and false otherwise
+	ALGORITHM:	
+		equal := FALSE
+		IF (inObj IS A Alliance) THEN
+			inAll(Alliance) := (Convert to Alliance)inObj
+			equal := equals <- inAll.getName(), inAll.getYears(), 
+				inAll.getBanner()
+		END IF
+	END SUBMODULE equals
+
+	SUBMODULE:	toString
+	IMPORT:		none
+	EXPORT:		outStr(String)
+	ALGORITHIM:	
+		COMMENT: This method will be called by toString methods of House & 
+			Army since newAlliance.toString() will access the subclass method
+			However, still functions as a stand alone method
+		
+		COMMENT: Checking if an 's' is needed
+		IF years = 1 THEN	
+			yStr(String) := ", "
+		END IF
+		ELSE
+			yStr := "s, "
+		END ELSE
+		
+		outStr:= name + " has existed for " + years + " year" + yStr 
+			+ banner.toString <- none 
+	END SUBMODULE toString
+
+	SUBMODULE:	toFileString
+	IMPORT:		none
+	EXPORT:		outStr(String)
+	ALGORITHIM:
+		COMMENT: As in toString, method will be called from House/Army
+		
+		outStr := name + "," + banner.toFileString <- none 	
+	END toFileString
+	
+
+	MUTATORS:
+
+
+	SUBMODULE: 	setName
+	IMPORTS:	inName(String)
+	ASSERTION: 	sets the name to inName
+	ALGORITHM:
+		IF validateName <- inName
+			name := inName
+		END IF
+		ELSE
+			FAIL
+		END ELSE
+
+	END SUBMODULE setName
+
+	SUBMODULE:	setYears
+	IMPORTS:	inYears(Integer)
+	ASSERTION:	sets the age of the house if valid and fails otherwise
+	ALGORITHM:
+		IF (validateYears <- inYears) THEN
+			years := inYears
+		END IF
+		ELSE
+			FAIL
+		END ELSE
+	END SUBMODULE setYears
+	
+	SUBMODULE:	setBanner
+	IMPORTS:	inBan(Banner)
+	ASSERTION:	sets the banner to a copy of the banner passed
+	ALGORITHIM:
+		banner := inBan.clone()
+	END SUBMODULE setBanner
+
+
+	ABSTRACT SUBMODULES:
+
+		
+	SUBMODULE:	population
+	EXPORT:		String
+	ASSERTION:	will return a string with the population of the alliance
+	
+	SUBMODULE:	clone
+	EXPORT:		newAlliance(Alliance)	
+	ASSERTION:	make a copy of the current object
+
+
+	PRIVATE SUBMODULES:
+
+
+	SUBMODULE:	validateName
+	IMPORTS:	inname(String)
+	EXPORT:		valid(Boolean)
+	ASSERTION:	name cannot be null
+		valid := inName != null
+	END SUBMODULE validateName
+
+	SUBMODULE:	validateYears
+	IMPORTS:	inYears(Integer)
+	EXPORT:		valid(Boolean)
+	ASSERTION:	years msut be between 1 and 10,000 inclusive
+	ALGORITHM:
+		valid := (inYears > YEARMIN - 1) AND (inYears < YEARMAX + 1)
+	END SUBMODULE validateYears
+
+	
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,52 @@
+Stephen Prac 9 Readme
+
+Date created: 18/10/2019
+
+Date last modified: 24/10/2019
+
+Purpose: 	Work in progress of OOPD assignment, to test knowledge on object 
+			orientation, and other coding practices
+
+Files in project: 	
+	Army.txt			- psuedo for Army class
+	Army.java			- java for Army class
+	Army.class			- complied Army class
+	House.txt			- psuedo for House class
+	House.java			- java for House class
+	House.class			- compiled House class
+	Banner.txt			- psuedo for Banner class
+	Banner.java			- java for Banner class
+	Banner.class		- compiled Banner class
+	Alliance.txt		- psuedo for Alliance class
+	Alliance.java		- java for Alliance class
+	Alliance.class		- compiled Alliance class
+	FileManager			- psuedo, java, class, handles file IO
+	KingdomManager		- psuedo, java, class, starting point of program
+	Menu.class			- provided menu for program
+	UserInterface		- peusdo, java, class, handles user I/O
+
+TestFiles:
+	TestArmy				- java, class, driver code to test Army class
+	TestHouse				- java, class, driver code to test House class
+	TestBanner				- java, class, driver code to test Banner class
+	testClass				- java, class, class inherits from alliance in 
+								order to be able to test Alliance
+	testAll					- java, class, driver code to test Alliance 
+	test.txt				- describes test input for program
+	test1.csv				- test input file1
+	test2.csv				- test input file2
+	test3.csv				- test input file3
+	expectedResults.txt		- details expected results from test.txt
+	actualResults.txt		- details actual results from test.txt
+	script.sh				- work in progress, to try read in test.txt to 
+							avoid manual input
+
+Functionality: See assignment specification.
+
+TODO:	
+	- finish script.sh 
+Known bugs
+    negative hex strings might cause errors. They are accepted, but print as
+	differently then entered and might throw errors with some functionality.
+
+

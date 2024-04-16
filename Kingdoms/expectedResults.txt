@@ -1,0 +1,165 @@
+prompt for house or army			
+prompt for name
+prompt for age
+re prompt
+re prompt
+re prompt
+prompt for bannermen
+re prompt
+prompt for castle name
+prompt for Sigil
+re prompt
+re prompt
+prompt for banner colour
+re prompt
+re prompr
+prompt for sigil colour
+Main menu
+prompt for house or army
+prompt for name
+prompt for age
+prompt for bannermen
+prompt for castle
+prompt for sigil
+prompt for banner colour
+prompt fot sigil colour
+Main Menu
+prompt for house or army
+prompt for name
+prompt for age
+re prompt
+re prompt
+re prompt
+prompt for footmen
+re prompt
+re prompt
+prompt for archers
+prompt for history
+prompt for sigil
+prompt for banner colour
+prompt for sigil colour
+Main Menu
+prompt for hosue or army
+prompt for name
+prompt for age
+prompt for footmen
+prompt for archers
+prompt for history
+prompt for sigil
+prompt for banner Colour
+prompt for sigil colour
+Main Menu
+prompt strength options
+stongest alliance test, strength of 24000
+Kingdom strength: 46941   49694???
+Main Menu
+Armies 1 and 4 are the same
+prompt filename
+user friendly error -> Main Menu
+prompt for filename
+kingdoms are equal -> Main Menu
+displays current alliances -> Main Menu
+stark 544, test: 12000, Hesheroth: 44793, Hesheroth: 44793-> Main Menu
+prompt for alliance name
+prompt for sigil
+prompt for banner colour
+prompt for sigil colour
+successfull updated -> Main Menu
+show alliances with updated banner
+prompt for filename
+unable to load -> Main Menu
+prompt for filename
+succesfully loaded -> Main Menu
+prompt for filename
+Error msg: invalid objects in file, see below for mor detail -> Main Menu
+prompt for filename
+succesfully loaded: see below for more detail-> Main Menu
+prompt for filename
+saved successfully -> MainMenu
+prompt for filename
+saved successfully -> MainMenu
+prompt for filename
+saved successfully -> MainMenu
+show current alliances -> Main Menu
+Goodbye -> terminal
+
+2nd test, conduct UPON Completion of first test:
+
+1. 	prompt for filename
+2.	successfully loaded <- main Menu
+3.	prompt for filename
+4.	kingdoms match <- Main menu
+5.	prompt for filename
+6.	successfully loaded <- main menu
+7. 	prompt for filename
+8.	successfully loaded <- main menu
+9. 	prompt for file name
+10.	successfully loaded <- main menu
+11.	display alliances, has each from loaded files, might have overloaded arrays
+12. goodbye <- terminal
+
+
+FROM FILES:
+
+
+	test1.csv
+
+		HOUSE:
+			1.	valid
+			2.	valid
+		ARMY:
+			3. 	valid
+			4. 	valid
+
+
+	test2.csv
+
+		HOUSE:
+			1.	invalid name
+			2. 	invalid years min
+			3. 	invalid years max
+			4.  invalid sigil
+			5.  invalid bannercol too short
+			6. 	invalid sigilcol not a col
+			7. 	invalid bannermen min
+			8.	invalid bannermen max
+		ARMY:
+			9.	invalid name
+			10. invalid years min
+			11. invalid years max
+			12. invalid sigil
+			13. invalid bannercol null
+			14. invalid sigilcol too long
+			15.	invalid footmen min
+			16. invalid footmen max
+			17. invalid archers min
+			18. invalid archers max
+			19. invaid alliance, wrong char
+			20. invalid alliance, inccorrect length
+			21. invalid alliance, null
+
+		
+	test3.csv
+
+	NOTE: all results should be valid, below depicts what is being tested
+	
+		HOUSE:
+			1.	years min
+			2.	years max
+			3.	sigil mixed case
+			4.	bannermen min
+			5.	bannermen max
+			6. 	empty castle
+		ARMY:
+			7.	years min
+			8.	years max
+			9.	footmen min
+			10. footmen max
+			11. archers min
+			12. archers max
+			13. blank history
+
+	should be three files with kingdom saved in it. saved.csv saved.txt and 
+		saved test them by loading them.
+
+END OF TESTING!

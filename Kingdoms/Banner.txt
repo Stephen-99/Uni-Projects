@@ -1,0 +1,224 @@
+/******************************************************************************
+* Filename:         Banner.txt                                                *
+* Author:           Stephen den Boer                                          *
+* Unit code:		COMP 1001												  *
+* Student ID:		19761257												  *
+* Purpose:          Template for Banner object                                *
+* Date created:     26/09/2019                                                *
+* Last modified:    25/10/2019                                                *
+* changes:                                                                    *
+* 	EDIT 1 | 28/09/2019 | edited default banner colour, outpuut string 		  *
+*						  formatting and int2Hex Submodule                    *
+*	EDIT 2 | 18/10/2019 | updated toString and toFileString methods			  *
+*	EDIT 3 | 25/10/2019 | updated hex2int method to deal with negative 		  *
+*						  numbers								  			  *
+******************************************************************************/
+
+CLASS: Banner
+	
+	PUBLIC CLASS CONSTANTS: 
+			sigils(ARRAY OF Strings) := {"WOLF", "TOTEM", "LION", "DRAGON"}
+
+	CLASS FIELDS:	sigil(String)
+					bannerColour(Integer)
+					sigilColour(Integer)
+	
+	
+	CONSTRUCTORS:
+
+	
+	Default:
+	IMPORT:		none
+	EXPORT: 	address of Banner object
+	ASSERTION:	sigil "WOLF", bannerColour 2222222, sigilColour 000000, 
+				is a valid banner. This is the default state.
+	ALGORITHM:
+		sigil := sigils[0]
+		bannerColour := 2222222
+		sigilColour := 000000
+	END default CONSTRUCTOR
+
+	Alternate1:
+	IMPORT:		inSigil(String), inBannerColour(String), inSigilColour(String)
+	EXPORT:		address of new banner object
+	ASSERTION: 	creates the object if imports are valid, fails otherwise
+	ALGORITHM:
+		setSigil <- inSigil
+		setBannerColour <- inBannerColour
+		setSigilColour <- inSigilColour
+	END Alternate1 CONSTRUCTOR
+
+	copy:
+	IMPORT:		inBanner(Banner)
+	EXPORT:		Address of new Banner object
+	ASSERTION:	creats the object if import is valid, else will fail
+	ALGORITHM:
+		sigil := inBanner.getSigil <- none
+		bannerColour := inBanner.getBannerColour <- none
+		sigilColour := inBanner.getSigilColour <- none
+	END copy CONSTRUCTOR
+
+
+	ACCESSORS:
+
+	
+	SUBMODULE: 	clone
+	IMPORT:		none
+	EXPORT:		newBanner(Banner)
+	ASSERTION:	will make a copy of the current object
+		newBanner := copy Constructor <- this
+	END SUBMODULE clone
+
+	SUBMODULE:	getSigil
+	IMPORT:		none
+	EXPORT:		sigil(String)
+
+	SUBMODULE:	getBannerColour
+	IMPORT:		none
+	EXPORT:		bannerColour(Integer)
+	
+	SUBMODULE:	getBannerColourString
+	IMPORT:		none
+	EXPORT:		banCol(String)
+		banCol := int2Hex <- bannerColour
+		
+	SUBMODULE:	getSigilColour
+	IMPORT:		none
+	EXPORT:		sigilColour(integer)
+
+	SUBMODULE:	getSigilColourColour
+	IMPORT:		none
+	EXPORT:		sigCol(String)
+		sigCol := int2Hex <- sigilColour
+
+	SUBMODULE:	equals
+	IMPORT:		inSigil(String), inBannerColour(String), inSigilColour(String)
+	EXPORT:		equal(Boolean)
+	ASSERTION:	will return true values are equivelent to the current object 
+				and false otherwise
+	ALGORITHM:
+		inBanCol(Integer) := hex2Int <- inBannerColour
+		inSigCol(Integer) := hex2Int <- inSigilColour
+		equal := ((CONVERT TO UPPERCASE)sigil EQUALS 
+			(CONVERT TO UPPERCASE)inSigil) AND (bannerColour = inBanCol) AND 
+			(sigilColour = inSigCol) 
+	END SUBMODULE equals
+
+	SUBMODULE:	equals
+	IMPORT:		inObj(Object)
+	EXPORT:		equal(Boolean)
+	ASSERTION:	will return true if objects are equivelent and false otherwise
+	ALGORITHM:
+		equal := FALSE
+		IF (inObj IS A Banner) THEN
+			inObj := (CONVERT TO Banner)inObj
+			equal := (sigil EQUALS inObj.sigil) AND 
+				(bannerColour = inObj.bannerColour) AND 
+				(sigilColour = inObj.igilColour)
+		END IF
+	END SUBMODULE equals
+
+	SUBMODULE:	toString
+	EXPORT:		outStr(String)
+	ASSERTION:	will return the object as a string
+	ALGORITHM:
+		outStr := "its " + int2Hex <- bannerColour + " Banner consists of a " 
+			+ int2Hex <- sigilColour + " Sigil in the shape of a " + sigil 
+			+ "."
+	END SUBMODULE toString
+		
+	SUBMODULE:	toFileString
+	EXPORT:		outStr(String
+	ASSERTION:	will return the object as a string in format suitable for 
+				csv file storage
+	ALGORITHM:
+		outStr := sigil + "," + int2Hex <- bannerColour ","
+			+ int2Hex <-sigilColour
+	END SUBMODULE toFileString
+
+	
+	MUTATORS:
+
+
+	SUBMODULE: 	setSigil
+	IMPORT:		inSigil(String)
+	ASSERTION:	sets the sigil if valid, else Fails
+	ALGORITHM:
+
+		IF (validateSigil <- inSigil) THEN
+			sigil := inSigil
+		END IF
+		ELSE
+			THROW IllegalArgumentException <- "Invalid sigil"
+		END ELSE
+	END SUBMODULE setSigil
+		
+	SUBMODULE: 	setBannerColour
+	IMPORT:		inBannerColour(String)
+	ASSERTION:	sets the bannerColour if valid, else Fails
+	ALGORITHM:
+		inBanCol(Integer) := hex2Int <- inBannerColour
+		bannerColour := inBanCol
+	END SUBMODULE setBannerColour
+		
+	SUBMODULE: 	setSigilColour
+	IMPORT:		inSigilColour(String)
+	ASSERTION:	sets the sigilColour if valid, else Fails
+	ALGORITHM:
+		inSigCol(Integer) := hex2Int <- inSigilColour
+		sigilColour := inSigCol
+	END SUBMODULE setSigilColour
+
+
+	PRIVATE SUBMODULES:
+	
+	
+	SUBMODULE:	validateSigil
+	IMPORT:		inSigil(Sring)
+	EXPORT:		valid(Boolean)
+	ASSERTION:	will return true if sigil is valid
+	ALGORITHM:
+		valid := FALSE
+		FOR ii := 0 WHILE ii < (LENGTH OF)sigils AND NOT valid INC BY 1
+			valid := (sigils[ii] EQUALS (CONVERT TO UPPERCASE)inSigil)
+		END FOR
+	END SUBMODULE validateSigil
+
+	SUBMODULE:	hex2Int
+	IMPORT:		hex(String)
+	EXPORT:		inte(Integer)
+	ASSERTION:	will convert input to Integer or fail if invalid input
+		TRY:
+			IF (CONVERT TO Character)hex[0] = '-' THEN
+				THROW IllegalArgumentException <- "Please ensure hexadecimal "
+					+ "numbers are positive"
+			IF (LENGTH OF)hex = 6 THEN
+				inte := (PARSE AS INT FROM HEXADECIMAL)hex
+			END IF
+			ELSE
+				THROW IllegalArgumentException <- "Invalid colour. Please use "
+					+ "Hexadecimal notation"
+			END ELSE
+		END TRY
+		CATCH Parse error
+			THROW IllegalArgumentException
+		END CATCH
+	END SUBMODULE hex2Int
+
+	SUBMODULE:	int2Hex
+	IMPORT:		inte(Integer)
+	EXPORT:		hex(String)
+	ASSERTION:	will convert input to hex string or fail if invalid input
+		TRY:
+			hex := (CONVERT TO HEXADECIMAL String FROM Integer)inte	
+			IF (LENGTH OF)hex < 6 THEN
+				hex = 0(REPEAT 6 - (LENGTH OF)hex times) + hex
+			END IF
+		END TRY
+		CATCH Parse error
+			THROW IllegalArgumentException
+		END CATCH
+	END SUBMODULE int2Hex
+
+END CLASS: Banners
+

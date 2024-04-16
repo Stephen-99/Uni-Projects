@@ -1,0 +1,265 @@
+/******************************************************************************
+* Filename:         Army.txt                                                  *
+* Author:           Stephen den Boer                                          *
+* Unit code:		COMP 1001												  *
+* Student ID:		19761257												  *
+* Purpose:          Template for Army object                                  *
+* Date created:     26/09/2019                                                *
+* Last modified:    25/10/2019                                                *
+* changes:                                                                    *
+* 	EDIT 1 | 28/09/2019 | added more constants and a validation submodule for *
+*						  Strings, used to validate name and history.         *
+*	EDIT 2 | 18/10/2019 | implemented banner as a classfield. Every method 	  *
+*						  has been updated accordingly.						  *
+*						  population and battleStrength methods have been	  *
+*						  implemented. updated validateString to check for 	  *
+*						  additionaly empty conditions. toString and 		  *
+*	EDIT 3 | 23/10/2019 | updated Army to inherit from Alliance. As a result, *
+*						  only footmen, archers and history are classfields.  *
+*						  This resulted in most method being updated and some *
+*						  being deleted. additionally, population has been 	  *
+*						  update to return a string as per worksheet 10		  *
+*	EDIT 4 | 24/10/2019 | updated toString to round real output using 		  *
+*						  UserInterface										  *
+* 	EDIT 5 | 25/10/2019 | added obtainType method							  *
+******************************************************************************/
+
+CLASS: Army inherits from Alliance
+
+	PUBLIC CLASS CONSTANTS:	
+ 		TOL(Real) := 0.001
+		FOOTMIN(Real) := 3.5
+		FOOTMAX(Real) := 160.5
+		ARCHEREMIN(Real) := 1.5
+		ARCHERMAX(Real) := 112.5
+
+	CLASS FIELDS:   footmen(Real)
+					archers(Real)
+					history(String)
+
+
+	CONSTRUCTORS:
+
+
+	Default:
+	IMPORT:     none
+	EXPORT:     address of new army object
+	ASSERTION:  10 groups of footmen and 3.4 groups of archers with a history
+				of "The oldest army". These are valid default values
+	ALGORITHIM:
+		super default constructor <- none
+		footmen := 10
+		archers := 3.4
+		history := "The oldest army"
+	END default CONSTRUCTOR    
+
+	Alternate1:
+	IMPORT:     inName(String), inYears(Integer), inFootmen(Real),
+				inArchers(Real), inHistory(String), inSigil(String), 
+				inBanCol(String), inSigCol(String)
+	EXPORT:     address of new army object
+	ASSERION:   creates the object if imports are valid, FAILS otherwise
+	ALGORITHIM:
+		super alternate constructor <- inName, inYears, inSigil, inBanCol, 
+			inSigCol
+		setFootmen <- inFootmen
+		setArchers <- inArchers
+		setHistory <- inHistory
+	
+	END Alternate1 CONSTRUCTOR
+
+	Alternate2:
+	IMPORT:     inName(String), inYears(Integer), inFootmen(Real),
+				inArchers(Real), inHistory(String), inBanner(Banner)
+	EXPORT:     address of new army object
+	ASSERION:   creates the object if imports are valid, FAILS otherwise
+	ALGORITHIM:
+		super alternate constructor <- inName, inYears, inBanner
+		setFootmen <- inFootmen
+		setArchers <- inArchers
+		setHistory <- inHistory
+	END Alternate2 CONSTRUCTOR
+
+
+	Copy:
+	IMPORT:		inArmy (ArmyClass)
+	EXPORT:		address of new army object
+	ASSERTION:	Creates an object with identical object state as the import
+	ALGORITHM:
+		super copy constructor <- inArmy
+		footmen := inArmy.getFootmen <- none
+		archers := inArmy.getArchers <- none
+		history := inArmy.getHistory <- none
+
+	END copy CONSTRUCTOR
+
+
+	ACCESSORS:
+
+
+	clone:
+	IMPORT:		none
+	EXPORT:		newArmy(Army)
+	ASSERTION:	will make a copy of the current object
+		newArmy := copy Constructor <- this
+
+	END clone ACCESSOR
+
+	SUBMODULE:	getFootmen
+	IMPORT:		none
+	EXPORT:		footmen(Real)
+	
+	SUBMODULE:	getArchers
+	IMPORT:		none
+	EXPORT:		archers(Real)
+
+	SUBMODULE:	getHistory
+	IMPORT:		none
+	EXPORT:		copy of history(String)
+		
+	SUBMODULE: 	equals
+	IMPORT:		inName(String), inYears(Integer), inFootmen(Real),
+				inArchers(Real), inHistory(String), inBanner(Banner)
+	EXPORT:		equal(Boolean)
+	ASERTION:	Will return true if objects are equivelent and false otherwise
+	ALGORITHM:
+		equal := (super.equals <- inName, inYears, inBanner) AND
+			AND (footmen - inFootmen < TOL) AND (archers - inArchers < TOL) 
+			AND (history EQUALS inHistory)
+
+	END SUBMODULE equals
+
+	SUBMODULE:	equals
+	IMPORT:		inObj(Object)
+	EXPORT:		equal(Boolean)
+	ASERTION:	Will return true if objects are equivelent and false otherwise
+	ALGORITHM:	
+		equal := FALSE
+		IF (inObj IS A Army) THEN
+			inObj := (Convert to Army)inObj
+			equal := equals <- inObj.getName(), inObj.getYears(), 
+				inObj.getFootmen(), inObj.getArchers(), inObj.getHistory(), 
+				inObj.getBanner()
+		END IF
+
+	END SUBMODULE equals
+
+	SUBMODULE:	toString
+	EXPORT:		outStr(String)	
+	ALGORITHM:
+		IF ((history = null) OR (history EQUALS "") OR 
+			(history EQUALS " ")) THEN
+			outStr := "The Army of " + super.toString <- none 
+				+ " This Army has " + UserInterface.round <- footmen 
+				+ " groups of footmen and " 
+				+ UserInterface.round <- archers +
+				 " squads of archers at its ready."
+		END IF
+		ELSE
+			outStr := "The Army of " + super.toString <- none 
+				+ " This Army has " + UserInterface.round <- footmen 
+				+ " groups of footmen and " 
+				+ UseriInterface.round <- archers 
+				+ " squads of archers at its ready. " 
+				+ "The history of this army is that it is " + history + "."
+		END ELSE
+	END SUBMODULE toString
+
+	SUBMODULE: 	toFileString
+	EXPORT:		outStr(String)
+	ALGOIRTHIM:
+		IF ((history = null) OR (history EQUALS "") THEN
+			COMMENT: If history is empty, return a space so file can be read
+			outStr := "A" + "," + super.toFileString <- none + "," + footmen 
+				+ "," + archers + "," + " "	 
+		END IF
+		ELSE
+			outStr := "A" + "," + super.toFileString <- none + "," + footmen 
+				+ "," + archers + "," + history
+		END ELSE
+
+	END SUBMODULE toFileString
+
+	SUBMODULE:	population
+	EXPORT:		pop(String)
+	ALGORITHM:
+		popReal(Real) := footmen * 120.0 + archers * 14.0
+		popInt(Integer) := (CONVERT TO Integer)popReal
+		pop := "The Army of " + super.getName <- none + "consists of "
+			+ popInt + " people."
+			COMMENT: should what if footmen * 120 is not a whole num. should 
+				I round each here or just final??
+	END SUBMODULE population
+
+	SUBMODULE:	battleStrength
+	EXPORT:		strInt(Integer)
+	ALGORITHM:
+		strReal(Real_ := footmen * 50.0 + archers * 14.0
+		strInt := (CONVERT TO Integer)strReal
+			COMMENT: same thing here as above. Think needs to be rounded here
+				whether both or just result becaus needs to be an int.
+	END SUBMODULE battleStrength
+
+	SUBMODULE:	obtainType
+	EXPORT:		type(String)
+	ASSERTION:	will return class type
+		type := "Army"
+	
+
+	MUTATORS:
+
+
+	SUBMODULE:	setFootmen
+	IMPORTS:	inFootmen(Real)
+	ASSERTION:	sets the number of footmen if valid, fails otherwise
+	ALGORITHM:
+		IF (validateFootmen <- inFootmen) THEN
+			footmen := inFootmen
+		END IF
+		ELSE
+			FAIL
+		END ELSE
+	END SUBMODULE setFootmen
+
+	SUBMODULE:	setArchers
+	IMPORTS:	inArchers(Real)
+	ASSERTION:	sets the number of squads of archers if valid, fails otherwise
+	ALGORITHM:
+		IF (validateArchers <- inArchers) THEN
+			archers := inArchers
+		END IF
+		ELSE
+			FAIL
+		END ELSE
+	END SUBMODULE setArchers
+
+	SUBMODULE:	setHistory
+	IMPORTS:	inHistory
+	ASSERTION:	sets history to inHistory
+	ALGORITHM:
+			history := inHistory
+	END SUBMODULE setHistory
+
+
+	PRIVATE SUBMODULES:
+
+
+	SUBMODULE:	validateFootmen
+	IMPORTS:	inFootmen(Real)
+	EXPORT:		valid(Boolean)
+	ASSERTION:	footmen must be between 3.5 and 160.5
+	ALGORITHM:
+		valid := (inFootmen > FOOTMIN) AND (inYears < FOOTMAX)
+	END SUBMODULE validateFootmen
+
+	SUBMODULE:	validateArchers
+	IMPORTS:	inArchers(Real)
+	EXPORT:		valid(Boolean)
+	ASSERTION:	archers must be between 1.5 and 112.5
+	ALGORITHM:
+		valid := (inArchers > ARCHERMIN) AND (inArchers < ARCHERMAX)
+	END SUBMODULE validateArchers
+
+END CLASS: Army
+
+

@@ -1,0 +1,21 @@
+H, ,12,wolf,00FF00,FF0000,92,thing
+H,name,0,wolf,00FF00,FF0000,92,thing
+H,name,10001,wolf,00FF00,FF0000,92,thing
+H,name,12,olf,00FF00,FF0000,92,thing
+H,name,12,wolf,0FF00,FF0000,92,thing
+H,name,12,wolf,00FF00,KF0000,92,thing
+H,name,12,wolf,00FF00,FF0000,24,thing
+H,name,12,wolf,00FF00,FF0000,80001,thing
+A,,12,lion,00FF00,FF0000,36,18,thingo
+A,name,-4,lion,00FF00,FF0000,36,18,thingo
+A,name,120000,lion,00FF00,FF0000,36,18,thingo
+A,name,12,lin,00FF00,FF0000,36,18,thingo
+A,name,12,lion,,FF0000,36,18,thingo
+A,name,12,lion,00FF00,F0FF000,36,18,thingo
+A,name,12,lion,00FF00,FF0000,3.5,18,thingo
+A,name,12,lion,00FF00,FF0000,160.5,18,thingo
+A,name,12,lion,00FF00,FF0000,36,1.5,thingo
+A,name,12,lion,00FF00,FF0000,36,112.5,thingo
+G,name,12,lion,00FF00,FF0000,36,12.51,thingo
+AH,name,12,lion,00FF00,FF0000,36,12.51,thingo
+,name,12,lion,00FF00,FF0000,36,12.51,thingo

@@ -1,0 +1,235 @@
+/******************************************************************************
+* Filename:         house.txt                                                 *
+* Author:           Stephen den Boer                                          *
+* Unit code:		COMP 1001												  *
+* Student ID:		19761257												  *
+* Purpose:          Template for House object                                 *
+* Date created:     20/09/2019                                                *
+* Last modified:    25/10/2019                                                *
+* changes:                                                                    *
+* 	  EDIT 1 | 28/09/2019 | added constants and validate name submodule       *
+*     EDIT 2 | 18/10/2019 | implemented banner as a classfield. Every method  *
+*							has been updated accordingly.					  *
+*							population and battleStrength methods have been	  *
+*							added. validateName updated to check for 		  *
+*							additional empty conditions. toString and 		  *
+*							toFileString have also been updated in this 	  *
+*							manner						  					  *
+*	  EDIT 3 | 23/10/2019 | updated house to extend Alliance. This means only *
+*							castle and bannermen are classfields, with the 	  *
+*							others taken care of in Alliance. All methods 	  *
+*							have been appropiately updated or removed to 	  *
+*							accomadate for this change. Population has also   *
+*							been updated to return a string as specified in   *
+*							worksheet 10.	  								  *
+*	  EDIT 4 | 25/10/2019 | added obtainType method							  *
+******************************************************************************/
+
+CLASS: House inherits from Alliance
+
+	PUBLIC CLASS CONSTANTS:
+		BANMIN(Integer) := 25
+		BANMAX(Integer) := 80000
+
+	CLASS FIELDS:   bannermen(Integer)
+					castle(String)
+
+
+	CONSTRUCTORS:
+
+
+	Default:
+	IMPORT:     none
+	EXPORT:     address of new house object
+	ASSERTION:  100 bannermen and a castle named: "Fortress of Abadon" 
+				are valid values for the default state
+	ALGORITHIM:
+		super default constructor
+		bannermen := 100
+		castle := "Fortress of Abadon"
+	END default CONSTRUCTOR    
+
+	Alternate1:
+	IMPORT:     inName(String), inYears(Integer), inBannermen(Integer), 
+				inCastle(String), inSigil(String), inBanCol(String), 
+				inSigCol(String)
+	EXPORT:     address of new house object
+	ASSERION:   creates the object if imports are valid, FAILS otherwise
+	ALGORITHIM:
+		super alternate constructor <- inName, inYears, inSigil, inBanCol, 
+			inSigCol
+		setBannermen <- inBannermen
+		setCastle <- inCastle
+
+	END Alternate1 CONSTRUCTOR
+
+	Alternate2:
+	IMPORT:     inName(String), inYears(Integer), inBannermen(Integer), 
+				inCastle(String), inBanner(Banner)
+	EXPORT:     address of new house object
+	ASSERION:   creates the object if imports are valid, FAILS otherwise
+	ALGORITHIM:
+		super Alternate constructor <- inName, inYears, inBanner
+		setBannermen <- inBannermen
+		setCastle <- inCastle
+	END Alternate2 CONSTRUCTOR
+
+
+	Copy:
+	IMPORT:		inHouse (HouseClass)
+	EXPORT:		address of new house object
+	ASSERTION:	Creates an object with identical object state as the import
+	ALGORITHM:
+		Super copy constructor <- inHouse
+		bannermen := inHouse.getBannermen <- none
+		castle := inHouse.getCastle <- none
+	END copy CONSTRUCTOR
+
+
+	ACCESSORS:
+
+
+	clone
+	IMPORT		none
+	EXPORT		newHouse(House)
+	ASSERTION:	will make a copy of the current object
+		newHouse := copy Constructor <- this
+
+	END clone ACCESSOR
+
+	SUBMODULE:	getBannermen
+	IMPORT:		none
+	EXPORT:		bannermen(Integer)
+
+	SUBMODULE:	getCastle
+	IMPORT:		non
+	EXPORT:		copy of castle(String)
+
+	SUBMODULE:	equals
+	IMPORT:		other(Object)
+	EXPORT:		equal(Boolean)
+	ASERTION:	Will return true if objects are equivelent and false otherwise
+	ALGORITHM:	
+		equal := FALSE
+		IF (inObj IS A House) THEN
+			inHouse(House) := (Convert to House)inObj
+			equal := equals <- inHouse.getName(), inHouse.getYears(), 
+				inHouse.getBannermen(), inHouse.getCastle(), 
+				inHouse.getBanner()
+		END IF
+
+	END SUBMODULE equals
+
+	SUBMODULE: 	equals
+	IMPORT:		inName(String), inYears(Integer), inBannermen(Integer), 
+				inCastle(String), inBanner(Banner)
+	EXPORT:		equal(Boolean)
+	ASERTION:	Will return true if objects are equivelent and false otherwise
+	ALGORITHM:
+		equal := (super.equals <- inName, inYears, inBanner) AND 
+			(bannermen = inBannermen) AND (castle EQUALS inCastle)
+
+	END SUBMODULE equals
+
+	SUBMODULE:	toString
+	EXPORT:		outStr(String)	
+	ALGORITHM:
+		IF ((castle = null) OR (castle EQUALS " ") OR 
+			(castle EQUALS "")) THEN
+			outStr := "The House of " + super.toString <- none 
+				+ " This House has " + bannermen + " bannermen."
+		END IF
+		ELSE
+			outStr := "The House of " + super.toString <- none 
+				+ " This House has " + bannermen 
+				+ "bannermen and a castle named: " + castle + "."
+		END ELSE
+	END SUBMODULE toString
+
+	SUBMODULE: 	toFileString
+	EXPORT:		outStr(String)
+	ALGOIRTHIM:
+		IF ((castle = null) OR (castle EQUALS "") THEN
+			COMMENT: If empty castle, returning a space instead so file can be 
+				read
+			outStr := "H" + "," + super.toFileString <- none + "," + bannermen 
+				+ "," + " " 
+		END IF
+		ELSE
+			outStr := "H" + "," + super.toFileString <- none + "," + bannermen 
+				+ "," + castle
+		END ELSE
+	END SUBMODULE toFileString
+
+	SUBMODULE:	population
+	EXPORT:		pop(String)
+	ASSERTION:	Will return a string with the houses population
+	ALGORITHM:	
+		IF ((castle = null) OR (castle EQUALS "") OR 
+			(castle EQUALS " ")) THEN
+			popI(Integer) := bannermen
+		END IF
+		ELSE
+			popI := bannermen + 450
+		END ELSE
+	
+		pop := "The House of " + super.getName <- none + " has a population of"
+			+  popI + "."		
+
+	END SUBMODULE population
+
+	SUBMODULE:	battleStrength
+	EXPORT:		strength(Integer)
+	ALGORITHM:
+		IF ((castle = null) OR (castle EQUALS "") OR 
+			(castle EQUALS " ")) THEN
+			strength := bannermen * 2
+		END IF
+		ELSE
+			strength := bannermen * 2 + 20000
+		END ELSE
+	END SUBMODULE battleStrength
+
+	SUBMODULE:	obtainType
+	EXPORT:		type(String)
+	ASSERTION:	will return type of class
+		type := "House"
+
+
+	MUTATORS:
+
+
+	SUBMODULE:	setBannermen
+	IMPORTS:	inBannermen(Integer)
+	ASSERTION:	sets the number of bannermen if valid, fails otherwise
+	ALGORITHM:
+		IF (validateBannermen <- inBannermen) THEN
+			bannermen := inBannermen
+		END IF
+		ELSE
+			FAIL
+		END ELSE
+	END SUBMODULE setBannermen
+
+	SUBMODULE:	setCastle
+	IMPORTS:	inCastle
+	ASSERTION:	sets castle to inCastle
+	ALGORITHM:
+		castle := inCastle
+	END SUBMODULE setCastle
+
+
+	PRIVATE SUBMODULES:
+
+
+	SUBMODULE:	validateBannermen
+	IMPORTS:	inBannermen(Integer)
+	EXPORT:		valid(Boolean)
+	ASSERTION:	bannermen msut be between 25 and 80,000 inclusive
+	ALGORITHM:
+		valid := (inYears > BANMIN - 1) AND (inYears < BANMAX + 1)
+	END SUBMODULE validateBannermen
+
+END CLASS: House
+
+

@@ -1,0 +1,101 @@
+1
+1
+stark
+akl
+-89
+1200000
+12
+asdf
+94
+Smargenrog
+ghj
+124
+toTem
+asd
+00ff
+00ff00
+000f0f
+1
+1
+test
+9
+12000
+
+lIon
+0000f0
+ffff00 
+1
+2
+Hesheroth
+a
+-1
+12345678
+127
+a
+-3
+29.4
+91.7
+Simply the best
+wolf
+00FF00
+00FF00
+1
+2
+Hesheroth
+127
+29.4
+91.7
+Simply the best
+wolf
+00FF00
+00FF00
+2
+1
+2
+0
+3
+4
+hjk
+4
+test1.csv
+5
+6
+7
+stark
+wolf
+aabbcc
+ddeeff
+5
+8
+fg
+8
+test1.csv
+8
+test2.csv
+8
+test3.csv
+9
+saved.csv
+9
+saved.txt
+9
+saved
+5
+0
+
+2nd test, conduct UPON Completion of first test:
+
+1.	8
+2.	test1.csv
+3.	4
+4.	test1.csv
+5.	8	
+6.	saved.csv
+7.	8
+8.	saved.txt
+9.	8
+10.	saved
+11.	5
+12.	0
+
+GO THRU EVERYTHING MAKE SURE ALLLLL FUNCTIONALITY IS TESTED!
