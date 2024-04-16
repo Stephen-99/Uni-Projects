@@ -1,0 +1,90 @@
+V "GNAT Lib v9"
+M P W=b
+P ZX
+
+RN
+RV NO_EXCEPTIONS
+RV NO_IO
+RV NO_STANDARD_STORAGE_POOLS
+RV NO_DEFAULT_INITIALIZATION
+RV NO_DYNAMIC_SIZED_OBJECTS
+RV NO_IMPLEMENTATION_PRAGMAS
+RV SPARK_05
+
+U main%b		main.adb		0ad75b6c NE OO SU IL
+W ada%s			ada.ads			ada.ali
+W ada.numerics%s	a-numeri.ads		a-numeri.ali
+W ada.numerics.discrete_random%s
+Z ada.tags%s		a-tags.adb		a-tags.ali
+W ada.text_io%s		a-textio.adb		a-textio.ali
+W bubblesort%s		bubblesort.adb		bubblesort.ali
+W system%s		system.ads		system.ali
+Z system.random_numbers%s  s-rannum.adb		s-rannum.ali
+
+D ada.ads		20200312110721 76789da1 ada%s
+D a-except.ads		20200312110721 291912d5 ada.exceptions%s
+D a-ioexce.ads		20200312110721 e4a01f64 ada.io_exceptions%s
+D a-numeri.ads		20200312110721 bb51c45a ada.numerics%s
+D a-nudira.ads		20200312110721 71e55def ada.numerics.discrete_random%s
+D a-nudira.adb		20200312110721 72908cdb ada.numerics.discrete_random%b
+D a-stream.ads		20200312110721 119b8fb3 ada.streams%s
+D a-tags.ads		20200312110721 491b781d ada.tags%s
+D a-textio.ads		20200312110721 881db35a ada.text_io%s
+D a-unccon.ads		20200312110721 0e9b276f ada.unchecked_conversion%s
+D bubblesort.ads	20210907070331 160f01ed bubblesort%s
+D interfac.ads		20200312110721 5ab55268 interfaces%s
+D i-cstrea.ads		20200312110721 e53d8b8e interfaces.c_streams%s
+D main.adb		20210907123506 e520b434 main%b
+D system.ads		20200312110721 4635ec04 system%s
+D s-crtl.ads		20200312110721 0ebbdb71 system.crtl%s
+D s-exctab.ads		20200312110721 54135002 system.exception_table%s
+D s-ficobl.ads		20200312110721 078245e4 system.file_control_block%s
+D s-imguns.ads		20200312110721 9ff43cf7 system.img_uns%s
+D s-parame.ads		20200312110721 48ec542b system.parameters%s
+D s-rannum.ads		20200312110721 99ade2f2 system.random_numbers%s
+D s-rannum.adb		20200312110721 20ba1217 system.random_numbers%b
+D s-ransee.ads		20200312110721 01a57b33 system.random_seed%s
+D s-secsta.ads		20200312110721 20bbe636 system.secondary_stack%s
+D s-soflin.ads		20200312110721 a7318a92 system.soft_links%s
+D s-stache.ads		20200312110721 a37c21ec system.stack_checking%s
+D s-stalib.ads		20200312110721 09bd3940 system.standard_library%s
+D s-stoele.ads		20200312110721 2dc34a04 system.storage_elements%s
+D s-traent.ads		20200312110721 005bf670 system.traceback_entries%s
+D s-unstyp.ads		20200312110721 34867c83 system.unsigned_types%s
+D s-valuns.ads		20200312110721 10a8ed3b system.val_uns%s
+D s-wchcon.ads		20200312110721 1b7d22d2 system.wch_con%s
+X 1 ada.ads
+16K9*Ada 20e8 14|1r6 1r23 2r6 10r30
+X 4 a-numeri.ads
+16K13*Numerics 32e17 14|2r10 10r34
+X 5 a-nudira.ads
+44k22*Discrete_Random 75e33 14|2w19 10r43
+50R9 Generator<21|63R9> 14|12r11[10]
+52V13 Random{14|9I6} 14|21s28[10]
+55U14 Reset<21|100p14> 14|19s5[10]
+X 6 a-nudira.adb
+53V16 Random[21|83]{14|9I6} 22|392b13[14|10]
+X 9 a-textio.ads
+49K13*Text_IO 471e16 14|1w10 1r27
+166U14*New_Line 14|29s5
+263U14*Put_Line 14|24s5 29s15
+X 11 bubblesort.ads
+1K9*bubblesort 15e15 14|4w6 4r22
+4A10*IntArray(integer)<integer> 14|15r11
+10U15*sort 14|27s5
+13U15*displayArr 14|25s5 30s5
+X 12 interfac.ads
+74M9*Unsigned_32
+77M9*Unsigned_64
+X 14 main.adb
+8U11*main 8b11 31l5 31t9
+9I6 randRange<integer> 10r59
+10K13 randomInt[5|44] 11r9
+12r5 gen{5|50R9[10]} 19r11 21r35
+14i5 numItems{integer} 15r23 20r18 25r21 27r15 30r21
+15a5 arr{11|4A10} 21m9 25r16 27m10 27r10 30r16
+20i9 ii{integer} 21r13
+X 21 s-rannum.ads
+75V13*Random{12|74M9} 22|221i21
+76V13*Random{12|77M9} 22|221i21
+

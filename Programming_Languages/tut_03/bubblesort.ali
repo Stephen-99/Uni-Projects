@@ -1,0 +1,75 @@
+V "GNAT Lib v9"
+P ZX
+
+RN
+RV NO_IO
+RV NO_DYNAMIC_SIZED_OBJECTS
+RV SPARK_05
+
+U bubblesort%b		bubblesort.adb		d120dc24 NE OO PK IL
+W ada%s			ada.ads			ada.ali
+W ada.exceptions%s	a-except.adb		a-except.ali
+W ada.integer_text_io%s	a-inteio.ads		a-inteio.ali
+W ada.text_io%s		a-textio.adb		a-textio.ali
+
+U bubblesort%s		bubblesort.ads		160f01ed EE NE OO PK IL
+
+D ada.ads		20200312110721 76789da1 ada%s
+D a-except.ads		20200312110721 291912d5 ada.exceptions%s
+D a-inteio.ads		20200312110721 f64b89a4 ada.integer_text_io%s
+D a-ioexce.ads		20200312110721 e4a01f64 ada.io_exceptions%s
+D a-stream.ads		20200312110721 119b8fb3 ada.streams%s
+D a-tags.ads		20200312110721 491b781d ada.tags%s
+D a-textio.ads		20200312110721 881db35a ada.text_io%s
+D a-tiinio.ads		20200312110721 aa04e5d6 ada.text_io.integer_io%s
+D a-unccon.ads		20200312110721 0e9b276f ada.unchecked_conversion%s
+D bubblesort.ads	20210907070331 160f01ed bubblesort%s
+D bubblesort.adb	20210907070901 9060f5e2 bubblesort%b
+D interfac.ads		20200312110721 5ab55268 interfaces%s
+D i-cstrea.ads		20200312110721 e53d8b8e interfaces.c_streams%s
+D system.ads		20200312110721 4635ec04 system%s
+D s-crtl.ads		20200312110721 0ebbdb71 system.crtl%s
+D s-exctab.ads		20200312110721 54135002 system.exception_table%s
+D s-ficobl.ads		20200312110721 078245e4 system.file_control_block%s
+D s-parame.ads		20200312110721 48ec542b system.parameters%s
+D s-secsta.ads		20200312110721 20bbe636 system.secondary_stack%s
+D s-soflin.ads		20200312110721 a7318a92 system.soft_links%s
+D s-stache.ads		20200312110721 a37c21ec system.stack_checking%s
+D s-stalib.ads		20200312110721 09bd3940 system.standard_library%s
+D s-stoele.ads		20200312110721 2dc34a04 system.storage_elements%s
+D s-traent.ads		20200312110721 005bf670 system.traceback_entries%s
+D s-unstyp.ads		20200312110721 34867c83 system.unsigned_types%s
+D s-wchcon.ads		20200312110721 1b7d22d2 system.wch_con%s
+X 1 ada.ads
+16K9*Ada 20e8 11|1r6 1r23 2r6 2r31 3r6 3r26
+X 2 a-except.ads
+54K13*Exceptions 349e19 11|3w10 3r30
+X 3 a-inteio.ads
+18K13*Integer_Text_IO[8|46] 11|2w10 2r35
+X 7 a-textio.ads
+49K13*Text_IO 471e16 11|1w10 1r27
+73I12*Field{integer}
+166U14*New_Line 11|44s19
+242U14*Put 11|39s9 41s39 44s9
+X 8 a-tiinio.ads
+66U14*Put 11|41s13[3|18] 43s9[3|18]
+68i7 Width{7|73I12} 11|41r26[3|18] 43r28[3|18]
+X 10 bubblesort.ads
+1K9*bubblesort 15l5 15e15 11|5b14 47l5 47t15
+4A10*IntArray(integer)<integer> 7r33 10r33 13r35 11|7r33 19r33 36r35
+7U15*swap 7=20 7>43 11|7b15 16l9 16t13 28s21
+7a20 arr{4A10} 11|7b20 12m9 12r23 12r36 13m9 13r25 13r38 14m9 14r23 14r36
+7i43 index{integer} 11|8b5 12r13 12r27 12r40 13r13 13r29 13r42 14r13 14r27
+. 14r40
+10U15*sort 10=20 10>43 11|19b15 34l9 34t13
+10a20 arr{4A10} 11|19b20 27r21 27r31 28m26
+10i43 arrLen{integer} 11|19b43 26r29
+13U15*displayArr 13>26 13>45 11|36b15 45l9 45t19
+13a26 arr{4A10} 11|36b26 41r17 43r13
+13i45 arrLen{integer} 11|36b45 40r22 43r17
+X 11 bubblesort.adb
+21i9 count{integer} 26r38 32m13 32r22
+22b9 unOrdered{boolean} 24r15 25m13 29m21
+26i17 ii{integer} 27r25 27r35 28r31
+40i13 ii{integer} 41r21
+

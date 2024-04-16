@@ -1,0 +1,89 @@
+CO 
+    Stephen den Boer, 1961257
+    fizzbuzz program in algol68.
+    For numbers 1-100
+CO
+
+
+CO 
+    This was painful to work out. Basically we are converting each digit of the 
+    number to a character representation using ascii values.
+CO
+PROC int to str = (INT num) STRING:(
+    STRING result; INT max size, INT temp, INT local num;
+
+    CO  max int is 2147483647, so this should be the biggest size needed CO
+    max size := 1000000000;
+    result := "";
+
+    CO negative number test
+        local num needed becasue num can't be modified CO
+    IF num < 0 THEN
+        result +:= "-";
+        local num := num * -1
+    ELSE
+        local num := num 
+    FI;
+
+
+    CO 
+        finding out how many digits the number has. max size will be a 1 in that
+        digit column followed by 0s, e.g. max digit is in the 1000s, 
+        max size would be 1000
+    CO
+    WHILE (ROUND(local num/max size -0.5) EQ 0)
+    DO
+        max size := ROUND(max size / 10)
+    OD;
+
+    CO converting each digit to a string and adding it to the string. CO
+    WHILE (max size >= 1)
+    DO
+        temp := ROUND(local num/max size -0.5);
+        result +:= digit to str(temp);
+        local num := local num - (temp * max size);
+        max size := ROUND(max size / 10)
+    OD;
+
+    CO  so that result is returned since last evaluated expression is used 
+        as the return value CO
+        result
+);
+
+CO  
+    +48 gives the correct ascii value representation of that digit. 
+    Only works when the passed number is a digit, if the passed 
+    number is greater than 9 it will give an inncorrect value.
+CO
+PROC digit to str = (INT digit) STRING:(
+    REPR(digit + 48)
+);
+
+
+CO    For evaluating if it should be a 'fizz', 'buzz' 'fizz buzz' or number    CO
+PROC evaluate fizz buzz = (INT n) STRING:
+    IF n MOD 15 EQ 0 THEN
+        "Fizz Buzz"
+    ELIF n MOD 5 EQ 0 THEN
+        "BUZZ"
+    ELIF n MOD 3 EQ 0 THEN
+        "FIZZ"
+    ELSE
+        int to str(n)
+    FI
+;
+
+
+CO    
+    Control starts here. Will loop and evaluate each number according to the
+    fizzbuzz algorithm, printing the result.
+CO
+main:
+(
+    FOR ii FROM 1 BY 1 TO 100 DO
+        print((evaluate fizz buzz(ii), new line))
+    OD
+)
+
+
+
