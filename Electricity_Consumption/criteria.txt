@@ -1,0 +1,92 @@
+Response to criteria
+
+1. Appropriate use of containers
+    Throughout the program I used many container types, mostly Lists and Maps.
+    I used a list when there was an uncertain number of elements, or the 
+    numberof elements would be changing (added/removed from list). I used maps
+    when I needed to map 1 value to another (such as category to 
+    powerConsumption) and/or when I wanted to look something up easily.
+
+    Sometimes I used a map to be able to check if it contains a certain value.
+    I used a map for this purpuse since it is much quicker to check if the 1 
+    value exists in the map, than to iterate through a list or array to see if
+    the value exists. This lead to some instances, where the 1 value was mapped 
+    to another, but only the key was used.
+
+2. Clear and distinct package/class/interface/method responsibilities
+    I used the MVC pattern to divide my packages, although since this program 
+    has a simple UserInterface, most of the code is in the model package. 
+    Things in the view package don't know much about the model package, and use
+    an iterator to access data.
+
+    Classes typically have 1 major purpose and so most of the subclasses will
+    have 1 public method and then multiple private methods to help it 
+    accomplish that task. Any other publci methods are normally to get 
+    information about the model. 
+
+    Each method is responsible for completing 1 subTask and may have to call
+    other methods to accomplish that task.
+
+    Interfaces represent a 'type' of class, i.e. all classes that implement it
+    must be able to do a certain thing. It may appear that the ProcessNetwork
+    interface is not used and its singular method could be added to each of its
+    sub-interfaces. While this is true, it is useful in distinguishing the 
+    different tasks. All 4 implementations process the network, 2 process it by
+    creating a network and 2 by outputing the network. This interface will also
+    be useful if the program is later extended.
+
+3. Appropriate error handling
+    The approach to error handling was to catch exceptions in the class they 
+    were thrown in order to appropriately seperate concerns. For example, the 
+    controller doesn't know if/when FileIO is being conducted, instead any 
+    possible exceptions are caught in the class reading/writing a file. If when
+    reading a file an exception occurs, the exception message will be 
+    displayed, and a null network returned. This means the controller doesn't 
+    care what exceptions might be thrown since they are already handled, it 
+    only cares if the network was initialised or not.
+
+4. Appropriate use of the Stratagy Pattern and the Template Method Pattern
+    The strategy pattern was used to reduce coupling between the controller and
+    both the model and view. This was done by having all options for processing
+    the network inherit from either an input or output interface. This allowed 
+    the controller to run the input and output options without knowing which 
+    option was selected, and allows the input and output options to appear in 
+    any order. This decoupling makes it much simpler to add a new input or 
+    output option in the future.
+
+    The template method pattern was used by the toString() method of the Node 
+    class (follows the file format). It means that both implementations of the
+    Node class, and any future implementations, don't need to create their own 
+    toString() method, obtaining the relevant information from the Node class,
+    but only need to provide a way to return the power usage (or lack of).
+    This made it very easy when writing to file, since I didn't have to check
+    what type of node implementation I had but could simply call toString(), 
+    which would ensure the correct format was followed.
+
+5. Appropriate use of the Compostie Pattern
+   The composite pattern was used to represent the network. The network is 
+   comprised of multiple nodes, which are either LeafNodes or TreeNodes. A 
+   treenode can have child nodes which can be either a treenode ot a leafnode. 
+   This allows us to have a network with any number of subgroups (as long as 
+   they fit in the allocated memory!)
+
+   The purpose of using this pattern is so that we don't need to know which 
+   subtype we are dealing with but can treat them as equals using the methods 
+   defined in the abstract class. The hasChildren() method somewhat breaks this
+   purpose. It essentially queries which type of subclass we are dealing with.
+   This is only used for the iterator which needs to add the children of any
+   treeNodes to its stack in order to iterate through them. This however, means
+   other classes do not have to query this but can use the iterator to access
+   the network instead.
+
+6. Clear and correct UML
+    Note: the UML was made using draw.io
+
+    In order to keep the UML clear, sometimes I didn't include names but only 
+    types for method parameters, getters and constructors were left out and 
+    some connections simplified or left out. The connections left out are 
+    multiple connections to the UserInterface that would cut across large 
+    parts of the diagram. The connection from the controller to the 
+    ProcessNetwork is represented as 4 indistinct types when in reality it is
+    1 of each of the specific implementations.
+
