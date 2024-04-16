@@ -1,0 +1,13 @@
+0.  Other
+1.  Back
+2.  Stomach
+3.  Left side
+4.  Right side
+
+
+
+0.  Other
+1.  Hands by SIDE
+2.  Hands under HEAD
+
+IT IS CONSIDERED BY THE SIDE IF IT's not under the head. If it's unclear: other. If 1 of each: other

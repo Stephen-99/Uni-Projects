@@ -1,0 +1,2 @@
+class GoBackException(Exception):
+    pass
