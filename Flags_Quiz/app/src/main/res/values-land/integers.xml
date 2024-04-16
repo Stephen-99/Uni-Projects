@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--Measurements are in dp.
+    Special:
+    0:  match_constraint
+    -1: match_parent
+    -2: wrap_content-->
+<resources>
+    <integer name="flag_dimension">175</integer>
+    <integer name="question_dimension_one">-1</integer>
+    <integer name="question_dimension_two">-2</integer>
+</resources>
